@@ -5,8 +5,8 @@ import { TbMessages } from 'react-icons/tb';
 import { MdOutlineCampaign, MdOutlineDesignServices } from 'react-icons/md';
 import { GrGroup } from 'react-icons/gr';
 import Image from 'next/image';
-import code_thinking from '../assets/images/code_thinking.svg';
-import pair_programming from '../assets/images/pair_programming.svg';
+import code_thinking from '../public/assets/images/code_thinking.svg';
+import pair_programming from '../public/assets/images/pair_programming.svg';
 
 const LandingPage = () => {
   return (
@@ -66,7 +66,7 @@ const LandingPage = () => {
             </div>
             <div>
               <MdOutlineCampaign className='m-auto w-40 h-12' />
-              <p className='text-lg font-bold '>Promote Your Project</p>
+              <p className='text-lg font-bold'>Promote Your Project</p>
               <p className='text-gray-500 text-lg'>
                 Do not hide your dreaming project, share it worldwide.
               </p>

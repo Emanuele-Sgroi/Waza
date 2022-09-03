@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "createdAt": "2020-01-27T20:44:17.665Z",
+    "updatedAt": "2020-01-27T20:44:17.665Z",
+    "name": "Ray",
+    "lastName": "Lou",
+    "bio": "CTO, Engineer, and Author @ IBM",
+    "website": "",
+    "socialProfile": {
+        "discord": "Manlio#3270",
+        "twitch": "https://www.twitch.tv/louiseyhannah",
+        "facebook": "https://www.facebook.com/manliochite/",
+        "twitter": "https://twitter.com/Amrod92"
+    },
+    "project": [
+        {
+            "id": 1,
+            "createdAt": "2020-01-27T20:44:17.665Z",
+            "title": "Create music store",
+            "tags": ["vue", "javascript", "music"],
+            "description": "Create a new music store description for android",
+            "excerpt": "Create a new music store description",
+            "status": "Software Development",
+            "technologyStack": ["vue", "JavaScript", "Node"],
+            "skills": "",
+            "difficulty": "medium",
+            "numberOfPeople": 3,
+            "communication": {
+                "discord": "https://discord.com/",
+                "twitch": "https://www.twitch.tv/",
+                "twitter": "https://twitter.com/home?lang=en",
+                "slack": "https://slack.com/intl/en-gb/"
+            },
+            "developmentTools": {
+                "github": "https://github.com/bradtraversy/next-crash-course/blob/main/data.js",
+                "trello": "https://trello.com/b/LItnb3s2/manlio-time",
+                "jira": "https://www.atlassian.com/software/jira",
+                "figma": "https://www.figma.com/file/iLzs6DdD5TTlOteJiHNQKx/Untitled?node-id=0%3A1"
+            }
+        }
+    ]
+  },
+  {
+    "id": 2,
+    "createdAt": "2020-01-29T20:44:17.665Z",
+    "updatedAt": "2020-01-29T20:44:17.665Z",
+    "name": "Silvia",
+    "lastName": "Luciani",
+    "bio": "",
+    "website": "",
+    "socialProfile": {
+        "discord": "Manlio#3270",
+        "twitch": "https://www.twitch.tv/louiseyhannah",
+        "facebook": "",
+        "twitter": ""
+    },
+    "project": [
+        {
+            "id": 1,
+            "createdAt": "2020-01-27T20:44:17.665Z",
+            "title": "Building a sudoku",
+            "tags": ["react", "javascript", "sudoku"],
+            "description": "A lovely sudoku game",
+            "excerpt": "A lovely sudoku game",
+            "status": "Cancelled",
+            "technologyStack": ["React", "JavaScript", "Node"],
+            "skills": "React",
+            "difficulty": "easy",
+            "numberOfPeople": 1,
+            "communication": {
+                "discord": "https://discord.com/",
+                "twitch": "",
+                "twitter": "",
+                "slack": ""
+            },
+            "developmentTools": {
+                "github": "https://github.com/bradtraversy/next-crash-course/blob/main/data.js",
+                "trello": "",
+                "jira": "",
+                "figma": ""
+            }
+        }
+    ]
+  }
+]
