@@ -45,20 +45,22 @@ const Navbar = () => {
         </form>
       </div>
 
-      <nav>
+      <nav className='mr-5 mt-2'>
         <ul className='flex gap-5'>
           <li>
             <Link href='/projects'>
-              <a className='flex bg-transparent hover:bg-red-500 text-red-700 hover:text-white py-1 px-3 border border-red-500 hover:border-transparent rounded'>
-                Explore
-              </a>
+              <button class='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400'>
+                <span class='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
+                  <a>Explore</a>
+                </span>
+              </button>
             </Link>
           </li>
           <li>
             <Link href='/login'>
-              <a className='hidden md:block mr-5 bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded'>
-                Login
-              </a>
+              <button className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
+                <a>Login</a>
+              </button>
             </Link>
           </li>
         </ul>

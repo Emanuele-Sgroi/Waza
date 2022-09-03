@@ -14,9 +14,9 @@ const LandingPage = () => {
       <div className='container mx-auto'>
         <div className='p-60'>
           <h1 className='md:text-center font-semibold text-7xl'>
-            Make your project{' '}
+            Make your project.{' '}
             <span className='font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-red-500 to-yellow-400'>
-              reality
+              Reality
             </span>
           </h1>
         </div>
