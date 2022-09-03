@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { AiFillTwitterCircle } from 'react-icons/ai';
 import { FaInstagramSquare, FaDiscord } from 'react-icons/fa';
 import { BsFacebook } from 'react-icons/bs';
@@ -15,7 +14,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className='ml-3 mt-5 ml-10'>
+      <div className='mt-5 ml-10'>
         <p className='text-lg font-bold text-gray-500'>Follow us:</p>
         <div className='flex mt-2'>
           <button>

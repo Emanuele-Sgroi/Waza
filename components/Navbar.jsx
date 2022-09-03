@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className='w-full flex justify-between items-center border-b-2 border-gray-150 py-2 px-4'>
+    <header className='sticky top-0 z-50 w-full flex justify-between items-center border-b-2 bg-white border-gray-150 py-2 px-4'>
       <div className='w-[100px] md:w-[130px]'>
         <Link href='/'>
           <a className='hover:text-red-700 text-lg ml-5'>技 | Waza</a>
@@ -56,7 +56,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link href='/login'>
-              <a className='flex mr-5 bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded'>
+              <a className='hidden md:block mr-5 bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded'>
                 Login
               </a>
             </Link>
