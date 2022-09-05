@@ -29,7 +29,7 @@ const LandingPage = () => {
             </h1>
             <button
               type='button'
-              class='mx-auto w-40 h-12  m-2 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg '
+              className='mx-auto w-40 h-12  m-2 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg '
             >
               Create Account
             </button>
@@ -44,7 +44,7 @@ const LandingPage = () => {
             </p>
             <button
               type='button'
-              class='mx-auto w-40 h-12  m-2 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg '
+              className='mx-auto w-40 h-12  m-2 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg '
             >
               Explore Projects
             </button>

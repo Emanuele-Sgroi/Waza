@@ -17,6 +17,31 @@ h1 {
   font-size: 2em;
 }
 
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.17em;
+}
+
+h4 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+}
+
+h5 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.83em;
+}
+
+h6 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.67em;
+}
+
 a {
   color: inherit;
   text-decoration: none;
