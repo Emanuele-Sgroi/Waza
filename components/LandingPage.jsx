@@ -4,6 +4,7 @@ import { BsCodeSlash } from 'react-icons/bs';
 import { TbMessages } from 'react-icons/tb';
 import { MdOutlineCampaign, MdOutlineDesignServices } from 'react-icons/md';
 import { GrGroup } from 'react-icons/gr';
+import { CgPatreon } from 'react-icons/cg';
 import Image from 'next/image';
 import code_thinking from '../public/assets/images/code_thinking.svg';
 import pair_programming from '../public/assets/images/pair_programming.svg';
@@ -12,15 +13,21 @@ const LandingPage = () => {
   return (
     <>
       <div className='container mx-auto'>
-        <div className='p-60'>
+        <div className='p-60 grid justify-items-center'>
           <h1 className='md:text-center font-semibold text-7xl'>
             Make your project.{' '}
             <span className='font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-red-500 to-yellow-400'>
               Reality
             </span>
           </h1>
+          <button
+            type='button'
+            className='text-white mt-10 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2'
+          >
+            GET STARTED
+          </button>
         </div>
-        <div className='flex flex-row bg-[#F9FBFD] pb-40 pt-40'>
+        <div className='flex flex-row bg-[#F9FBFD] pb-40 pt-40 rounded-lg'>
           <Image src={code_thinking} height={250} width={600} />
           <div className='flex flex-col'>
             <h1 className='flex flex-row text-center basis-1/2'>
@@ -51,7 +58,7 @@ const LandingPage = () => {
           </div>
           <Image src={pair_programming} height={250} width={600} />
         </div>
-        <div className='bg-[#F9FBFD] pb-40 pt-40'>
+        <div className='bg-[#F9FBFD] pb-40 pt-40 rounded-lg'>
           <h1 className='md:text-center'>
             Everything you’ll need. Nothing you won’t.
           </h1>
@@ -105,11 +112,18 @@ const LandingPage = () => {
         </div>
         <div className='ml-50 text-center md:text-center mb-40 mt-40'>
           <h1>Join the Movement.</h1>
-          <p>Join the global community of developers on Twitter and Discord.</p>
-          <div className='grid grid-cols-2 place-items-center pt-10'>
+          <p>
+            Join the global community of developers on Twitter and Discord, and
+            support us on Patreon
+          </p>
+          <div className='grid grid-cols-3 place-items-center pt-10'>
             <button className='w-55 h-12 px-5 ml-24 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg py-2.5 mr-2 mb-2'>
               <AiFillTwitterCircle className='mr-2 -ml-1 w-6 h-5' />
               Follow @Waza
+            </button>
+            <button className='w-55 h-12 px-5 ml-24 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 rounded-lg py-2.5 mr-2 mb-2'>
+              <CgPatreon className='mr-2 -ml-1 w-6 h-5' />
+              Become a Patreon
             </button>
             <button className='w-45 h-12 px-5 mr-24 mt-5 text-white  text-center inline-flex items-center bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg py-2.5 mb-2'>
               <FaDiscord className='mr-2 -ml-1 w-6 h-5' />

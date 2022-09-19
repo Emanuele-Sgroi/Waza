@@ -4,7 +4,7 @@ import { BsFacebook } from 'react-icons/bs';
 
 export default function Footer() {
   return (
-    <footer className='border-t-2 border-gray-150 mt-10'>
+    <footer className='border-t-2 pb-9 border-gray-150 mt-10'>
       <div className='relative mr-10'>
         <div className='absolute right-2.5 mt-5'>
           <p className='text-lg font-bold text-gray-500'>Support</p>

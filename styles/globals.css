@@ -60,3 +60,38 @@ a {
     background: black;
   }
 }
+
+.tag-item {
+  background-color: rgb(255, 255, 255);
+  display: inline-block;
+  padding: .5em .75em;
+  border-radius: 20px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-width: 1.5px;
+  margin-left: 5px;
+}
+
+.tag-item .close {
+  height: 20px;
+  width: 20px;
+  background-color: rgba(239, 45, 45, 0.851);
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-width: 1.5px;
+  color: rgb(0, 0, 0);
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: .5em;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.tags-input {
+  flex-grow: 1;
+  padding: .5em 0;
+  border: none;
+  outline: none;
+}
