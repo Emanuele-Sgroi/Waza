@@ -95,3 +95,12 @@ a {
   border: none;
   outline: none;
 }
+
+#gradient-canvas {
+  width: 100%;
+  height: 100%;
+  --gradient-color-1: #4CD4B0;
+  --gradient-color-2: #FFFCE6;
+  --gradient-color-3: #F24D16;
+  --gradient-color-4: #EDD834;
+}
