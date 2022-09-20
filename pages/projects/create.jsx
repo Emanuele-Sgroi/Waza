@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { getSession } from 'next-auth/react';
 
 import { BsGithub, BsTwitch } from 'react-icons/bs';
 import { FaTrello, FaJira, FaFigma, FaDiscord } from 'react-icons/fa';
@@ -64,7 +65,7 @@ const CreatePage = () => {
   };
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto mb-24'>
       <div className='mt-10'>
         <div className='grid justify-items-end'>
           <Link href='/projects'>
@@ -340,3 +341,21 @@ const CreatePage = () => {
 };
 
 export default CreatePage;
+
+export const getServerSideProps = async context => {
+  const session = await getSession(context);
+
+  // Check if user if logged in - if not send to login page
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+};

@@ -8,25 +8,13 @@ import { CgPatreon } from 'react-icons/cg';
 import Image from 'next/image';
 import code_thinking from '../public/assets/images/code_thinking.svg';
 import pair_programming from '../public/assets/images/pair_programming.svg';
+import HeroSection from './UI/HeroSection';
 
 const LandingPage = () => {
   return (
     <>
-      <div className='container mx-auto'>
-        <div className='p-60 grid justify-items-center'>
-          <h1 className='md:text-center font-semibold text-7xl'>
-            Make your project.{' '}
-            <span className='font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-r from-red-500 to-yellow-400'>
-              Reality
-            </span>
-          </h1>
-          <button
-            type='button'
-            className='text-white mt-10 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2'
-          >
-            GET STARTED
-          </button>
-        </div>
+      <div id='gradient' className='container mx-auto'>
+        <HeroSection />
         <div className='flex flex-row bg-[#F9FBFD] pb-40 pt-40 rounded-lg'>
           <Image src={code_thinking} height={250} width={600} />
           <div className='flex flex-col'>
@@ -110,7 +98,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-        <div className='ml-50 text-center md:text-center mb-40 mt-40'>
+        <div className='ml-50 text-center md:text-center pb-40 mt-40'>
           <h1>Join the Movement.</h1>
           <p>
             Join the global community of developers on Twitter and Discord, and

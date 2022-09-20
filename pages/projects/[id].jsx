@@ -8,7 +8,7 @@ const ProjectPage = ({ data }) => {
   const project = data[0];
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto mb-24'>
       <div className='mt-16 grid grid-cols-2 gap-4'>
         <div>
           <div className='flex'>

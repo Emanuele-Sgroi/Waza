@@ -12,17 +12,18 @@ generator client {
 }
 
 model Account {
-  id                String  @id @default(cuid())
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?  @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -40,10 +41,13 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  bio           String?
   accounts      Account[]
   sessions      Session[]
   Project       Project[]
@@ -59,6 +63,8 @@ model VerificationToken {
 
 model Project {
   id                 String            @id @default(cuid())
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
   userId             String
   tags               String[]
   description        String
@@ -69,6 +75,7 @@ model Project {
   user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   DevelopmentTool    DevelopmentTool[]
   Communication      Communication[]
+  SocialProfile      SocialProfile[]
 }
 
 model DevelopmentTool {
@@ -89,5 +96,17 @@ model Communication {
   twitch    String?
   twitter   String?
   Slack     String?
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model SocialProfile {
+  id        String  @id @default(cuid())
+  projectId String
+  discord   String?
+  twitch    String?
+  facebook  String?
+  twitter   String?
+  medium    String?
+  dev       String?
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

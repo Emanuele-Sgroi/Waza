@@ -5,7 +5,7 @@ import ProjectsCard from '../../components/ProjectsCard';
 
 const ProjectPage = ({ data }) => {
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto mb-24'>
       <div className='mt-10'>
         <h1>Projects</h1>
         <div>
