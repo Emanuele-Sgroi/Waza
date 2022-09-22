@@ -6,6 +6,7 @@ import { MdOutlineCampaign, MdOutlineDesignServices } from 'react-icons/md';
 import { GrGroup } from 'react-icons/gr';
 import { CgPatreon } from 'react-icons/cg';
 import Image from 'next/image';
+
 import code_thinking from '../public/assets/images/code_thinking.svg';
 import pair_programming from '../public/assets/images/pair_programming.svg';
 import HeroSection from './UI/HeroSection';
