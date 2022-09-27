@@ -25,8 +25,8 @@ model Account {
   scope             String?
   id_token          String?  @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Foreign keys
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -36,21 +36,8 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  // Foreign keys
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id            String    @id @default(cuid())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  bio           String?
-  accounts      Account[]
-  sessions      Session[]
-  Project       Project[]
 }
 
 model VerificationToken {
@@ -61,21 +48,52 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model User {
+  id                String              @id @default(cuid())
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  name              String?
+  email             String?             @unique
+  emailVerified     DateTime?
+  image             String?
+  bio               String?
+  // Foreign keys
+  accounts          Account[]
+  sessions          Session[]
+  project           Project[]
+  UserSocialProfile UserSocialProfile[]
+}
+
+model UserSocialProfile {
+  id       String  @id @default(cuid())
+  userId   String
+  discord  String?
+  twitch   String?
+  facebook String?
+  twitter  String?
+  medium   String?
+  dev      String?
+  // Foreign keys
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model Project {
   id                 String            @id @default(cuid())
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   userId             String
+  title              String
   tags               String[]
   description        String
+  difficulty_level   String
   skills             String[]
   technology_stack   String[]
   development_status String
   team_need          Int?
+  // Foreign keys
   user               User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  DevelopmentTool    DevelopmentTool[]
-  Communication      Communication[]
-  SocialProfile      SocialProfile[]
+  developmentTool    DevelopmentTool[]
+  communication      Communication[]
 }
 
 model DevelopmentTool {
@@ -86,6 +104,7 @@ model DevelopmentTool {
   figma     String?
   trello    String?
   notion    String?
+  // Foreign keys
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
@@ -95,18 +114,7 @@ model Communication {
   discord   String?
   twitch    String?
   twitter   String?
-  Slack     String?
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-}
-
-model SocialProfile {
-  id        String  @id @default(cuid())
-  projectId String
-  discord   String?
-  twitch    String?
-  facebook  String?
-  twitter   String?
-  medium    String?
-  dev       String?
+  slack     String?
+  // Foreign keys
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

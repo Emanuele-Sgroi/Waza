@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 
 import { BsGithub, BsTwitch } from 'react-icons/bs';
@@ -13,6 +14,7 @@ import TechnologyStack from '../../components/UI/TechnologyStackInput';
 import SkillsTag from '../../components/UI/SkillsTagsInput';
 
 const CreatePage = () => {
+  const router = useRouter();
   // Form useState
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState([]);
@@ -21,7 +23,7 @@ const CreatePage = () => {
   const [technology_stack, setTechStack] = useState([]);
   const [development_status, setDevStatus] = useState('');
   const [difficulty_level, setDiffLevel] = useState('');
-  const [teamNeed, setTeamNeed] = useState('');
+  const [teamNeed, setTeamNeed] = useState(0);
   const [discord, setDiscord] = useState('');
   const [twitch, setTwitch] = useState('');
   const [twitter, setTwitter] = useState('');
@@ -34,34 +36,38 @@ const CreatePage = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const response = await fetch('/api/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        title,
-        tags,
-        description,
-        skills,
-        technology_stack,
-        development_status,
-        difficulty_level,
-        teamNeed,
-        discord,
-        twitch,
-        twitter,
-        slack,
-        github,
-        jira,
-        figma,
-        trello,
-        notion,
-      }),
-      headers: {
-        'content-Type': 'application/json',
-      },
-    });
+    try {
+      const response = await fetch('/api/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          title,
+          tags,
+          description,
+          skills,
+          technology_stack,
+          development_status,
+          difficulty_level,
+          teamNeed,
+          discord,
+          twitch,
+          twitter,
+          slack,
+          github,
+          jira,
+          figma,
+          trello,
+          notion,
+        }),
+        headers: {
+          'content-Type': 'application/json',
+        },
+      });
 
-    const data = await response.json();
-    console.log('Frontend data: ', data);
+      const data = await response.json();
+      if (data) router.push(`/projects/${data.id}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -82,42 +88,47 @@ const CreatePage = () => {
           <div>
             <h2>Project Details</h2>
             <div className='mt-2 relative z-0 mb-6 w-full group'>
-              <input
-                type='text'
-                name='title'
-                id='title'
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer'
-                placeholder=' '
-              />
-              <label
-                htmlFor='title'
-                className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
-              >
-                Title
-              </label>
+              <div className='relative'>
+                <label
+                  htmlFor='title'
+                  className='block mb-2 mt-5 text-sm font-medium text-gray-900 dark:text-gray-400'
+                >
+                  Title
+                </label>
+                <input
+                  type='text'
+                  name='title'
+                  id='title'
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                  placeholder=' '
+                />
+              </div>
             </div>
-            <TagsInput tags={tags} setTags={setTags} />
             <div className='relative z-0 mb-6 w-full group'>
+              <label
+                htmlFor='description'
+                className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400'
+              >
+                Description
+              </label>
               <textarea
                 type='text'
                 name='description'
                 id='description'
                 value={description}
+                rows='4'
                 onChange={e => setDescription(e.target.value)}
-                className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:red-blue-500 focus:outline-none focus:ring-0 focus:border-red-600 peer'
-                placeholder=' '
+                className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
+                placeholder='Project Description...'
               />
-              <label
-                htmlFor='description'
-                className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
-              >
-                Description
-              </label>
-              <p className='text-sm text-gray-400'>0/500 Characters</p>
+              <p className='text-sm text-gray-400'>
+                {description.length}/500 Characters
+              </p>
             </div>
-            <div className='grid md:grid-cols-2 md:gap-6'>
+            <div className='grid md:grid-cols-3 md:gap-6'>
+              <TagsInput tags={tags} setTags={setTags} />
               <SkillsTag
                 className='relative z-0 mb-6 w-full group'
                 skills={skills}
@@ -138,7 +149,7 @@ const CreatePage = () => {
                   defaultValue={'default'}
                   onChange={e => setDevStatus(e.target.value)}
                   id='development_status'
-                  className='block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-red-400 dark:border-red-700 focus:outline-none focus:ring-0 focus:border-red-200 peer'
+                  className='w-full h-10 pl-3 pr-6 text-base bg-gray-50 placeholder-gray-600 border rounded-lg appearance-none focus:ring-red-500 focus:border-red-500 focus:shadow-outline'
                 >
                   <option value='default' disabled>
                     Development Status
@@ -169,7 +180,7 @@ const CreatePage = () => {
                   defaultValue={'DEFAULT'}
                   id='difficulty_level'
                   onChange={e => setDiffLevel(e.target.value)}
-                  className='block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-red-400 dark:border-red-700 focus:outline-none focus:ring-0 focus:border-red-200 peer'
+                  className='w-full h-10 pl-3 pr-6 text-base bg-gray-50 placeholder-gray-600 border rounded-lg appearance-none focus:ring-red-500 focus:border-red-500 focus:shadow-outline'
                 >
                   <option value='DEFAULT' disabled>
                     Difficulty Level
@@ -212,7 +223,7 @@ const CreatePage = () => {
                     id='discord'
                     value={discord}
                     onChange={e => setDiscord(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Discord'
                   />
                 </div>
@@ -225,7 +236,7 @@ const CreatePage = () => {
                     id='twitch'
                     value={twitch}
                     onChange={e => setTwitch(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Twitch'
                   />
                 </div>
@@ -238,7 +249,7 @@ const CreatePage = () => {
                     id='twitter'
                     value={twitter}
                     onChange={e => setTwitter(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Twitter'
                   />
                 </div>
@@ -251,7 +262,7 @@ const CreatePage = () => {
                     id='slack'
                     value={slack}
                     onChange={e => setSlack(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Slack'
                   />
                 </div>
@@ -268,7 +279,7 @@ const CreatePage = () => {
                       id='gitHub'
                       value={github}
                       onChange={e => setGithub(e.target.value)}
-                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       placeholder='GitHub'
                     />
                   </div>
@@ -282,7 +293,7 @@ const CreatePage = () => {
                     id='jira'
                     value={jira}
                     onChange={e => setJira(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Jira'
                   />
                 </div>
@@ -295,7 +306,7 @@ const CreatePage = () => {
                     id='figma'
                     value={figma}
                     onChange={e => setFigma(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Figma'
                   />
                 </div>
@@ -308,7 +319,7 @@ const CreatePage = () => {
                     id='trello'
                     value={trello}
                     onChange={e => setTrello(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Trello'
                   />
                 </div>
@@ -321,7 +332,7 @@ const CreatePage = () => {
                     id='notion'
                     value={notion}
                     onChange={e => setNotion(e.target.value)}
-                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                     placeholder='Notion'
                   />
                 </div>

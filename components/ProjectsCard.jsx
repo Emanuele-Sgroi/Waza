@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { excerpt } from '../utils/util';
 import styles from '../styles/EventItem.module.css';
 
 export default function ProjectCard({ prj }) {
@@ -9,13 +10,11 @@ export default function ProjectCard({ prj }) {
         <div className='flex'>
           <img
             className='inline object-cover w-16 h-16 mr-2 rounded-full'
-            src={prj.user.picture}
+            src={prj.user.image}
             alt='Profile image'
           />
           <div className='relative inline-block'>
-            <p>
-              {prj.user.name} {prj.user.lastName}
-            </p>
+            <p>{prj.user.name}</p>
             <p className='text-gray-500 text-sm'>{prj.user.bio}</p>
             <p className='text-sm'>
               Posted:{' '}
@@ -33,9 +32,9 @@ export default function ProjectCard({ prj }) {
         <div className='mt-2'>
           <div>
             <h2 className='font-medium'>{prj.title}</h2>
-
-            <p>{prj.excerpt}</p>
-
+            {/* The below code takes two parameters: description and the length to
+            make the excerpt */}
+            <p>{excerpt(prj.description, 25)}...</p>
             {prj.tags.map(tag => (
               <p key={tag} className='inline text-gray-500 text-sm mr-5'>
                 #{tag}
@@ -45,13 +44,13 @@ export default function ProjectCard({ prj }) {
           <div className='mt-2'>
             <p>
               Status:{' '}
-              {prj.status === 'cancelled' ? (
+              {prj.development_status === 'cancelled' ? (
                 <span className='text-red-600 font-semibold capitalize'>
-                  {prj.status}
+                  {prj.development_status}
                 </span>
               ) : (
                 <span className='text-green-700 font-semibold animate-pulse capitalize'>
-                  {prj.status}
+                  {prj.development_status}
                 </span>
               )}
             </p>

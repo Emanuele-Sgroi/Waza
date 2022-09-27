@@ -16,7 +16,7 @@ const HeroSection = () => {
           className='text-white flex items-center mt-10 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-full text-md px-6 py-3 text-center mr-2 mb-2'
         >
           <span>GET STARTED</span>
-          <BsArrowDownCircle className='ml-4 w-5 h-5' />
+          <BsArrowDownCircle className='animate-bounce ml-4 w-5 h-5' />
         </button>
       </div>
     </div>

@@ -12,8 +12,6 @@ const Navbar = () => {
   // NextAuth.JS session
   const { data: session } = useSession();
 
-  console.log(session);
-
   const router = useRouter();
 
   // TODO: Implement Search functionality
@@ -90,8 +88,8 @@ const Navbar = () => {
                     <Dropdown
                       label={
                         <Image
-                          width={40}
-                          height={40}
+                          width={50}
+                          height={50}
                           className='rounded-full cursor-pointer'
                           src={session.user?.image}
                           alt='Profile Photo'
@@ -104,15 +102,19 @@ const Navbar = () => {
                         <span className='block text-sm'>
                           {session.user?.name}
                         </span>
-                        <span className='block truncate text-sm font-medium'>
+                        <span className='block truncate text-sm font-bold'>
                           {session.user?.email}
                         </span>
                       </Dropdown.Header>
                       <Link href='/dashboard'>
-                        <Dropdown.Item>Dashboard</Dropdown.Item>
+                        <span>
+                          <Dropdown.Item>Dashboard</Dropdown.Item>
+                        </span>
                       </Link>
                       <Link href='/settings'>
-                        <Dropdown.Item>Settings</Dropdown.Item>
+                        <span>
+                          <Dropdown.Item>Settings</Dropdown.Item>
+                        </span>
                       </Link>
                       <Dropdown.Divider />
                       <Dropdown.Item
