@@ -66,13 +66,3 @@ export default async function main(req, res) {
 
   return await res.json(result);
 }
-
-// main()
-//   .then(async () => {
-//     await prisma.$disconnect();
-//   })
-//   .catch(async e => {
-//     console.error(e);
-//     await prisma.$disconnect();
-//     process.exit(1);
-//   });

@@ -1,3 +1,4 @@
+// Function to make excerpt from description
 export function excerpt(content, wordlimit) {
   var filter = content.replace(/\s+/g, ' '); // You can add more filters here
   var wordsarr = filter.split(' ');

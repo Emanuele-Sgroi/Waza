@@ -65,16 +65,17 @@ model User {
 }
 
 model UserSocialProfile {
-  id       String  @id @default(cuid())
-  userId   String
-  discord  String?
-  twitch   String?
-  facebook String?
-  twitter  String?
-  medium   String?
-  dev      String?
+  id      String  @id @default(cuid())
+  userId  String
+  discord String?
+  twitch  String?
+  website String?
+  github  String?
+  twitter String?
+  medium  String?
+  dev     String?
   // Foreign keys
-  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Project {

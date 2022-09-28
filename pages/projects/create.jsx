@@ -37,7 +37,7 @@ const CreatePage = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/create', {
+      const response = await fetch('/api/project/createProject', {
         method: 'POST',
         body: JSON.stringify({
           title,

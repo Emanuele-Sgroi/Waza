@@ -3,13 +3,12 @@ import { getSession, useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
 
 import ProjectsCard from '../../components/ProjectsCard';
+import LoadingSpinner from '../../components/UI/LoadingSpinner';
 
 const DashboardPage = () => {
-  const { data: session, status } = useSession();
-
-  const handleGetProjects = async () => {
+  const fetchGetProjects = async () => {
     try {
-      const response = await fetch('/api/getProjectsByEmail', {
+      const response = await fetch('/api/project/getProjectsByEmail', {
         method: 'GET',
         headers: {
           'content-Type': 'application/json',
@@ -29,14 +28,10 @@ const DashboardPage = () => {
 
   const { isLoading, isError, data, error } = useQuery(
     ['projects'],
-    handleGetProjects
+    fetchGetProjects
   );
 
-  console.log('This is data: ', data);
-
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   if (isError) {
     return <span>Error: {error.message}</span>;

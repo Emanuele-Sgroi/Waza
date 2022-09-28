@@ -1,9 +1,38 @@
 import React from 'react';
-import fs from 'fs';
+import { useQuery } from '@tanstack/react-query';
 
 import ProjectsCard from '../../components/ProjectsCard';
+import LoadingSpinner from '../../components/UI/LoadingSpinner';
 
-const ProjectPage = ({ data }) => {
+const ProjectPage = () => {
+  const fetchGetAllProjects = async () => {
+    try {
+      const response = await fetch(`/api/project/getAllProjects`, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const dataJSON = await response.json();
+      return await dataJSON;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const { isLoading, isError, data, error } = useQuery(
+    ['projects'],
+    fetchGetAllProjects
+  );
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
   return (
     <div className='container mx-auto mb-24'>
       <div className='mt-10'>
@@ -20,15 +49,3 @@ const ProjectPage = ({ data }) => {
 };
 
 export default ProjectPage;
-
-export async function getStaticProps() {
-  // Get files from data.json file
-  const files = fs.readFileSync('./data.json');
-  const data = JSON.parse(files);
-
-  return {
-    props: {
-      data,
-    },
-  };
-}
