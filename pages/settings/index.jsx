@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
+import { BiSave } from 'react-icons/bi';
 
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import SkillsTags from '../../components/SettingsUI/SettingsSkillsTag';
+import HobbiesTags from '../../components/SettingsUI/SettingsHobbiesTag';
 
 const SettingsPage = () => {
+  const [skills, setSkills] = useState([]);
+  const [hobbies, setHobbies] = useState([]);
+
+  // Fetch User information
   const fetchGetUserInformation = async () => {
     try {
       const response = await fetch(`/api/user/getUserInformation`, {
@@ -27,6 +34,11 @@ const SettingsPage = () => {
     fetchGetUserInformation
   );
 
+  // Create data variable from the createdAt data
+  var date = new Date(data?.createdAt);
+  // Convert string into dd/mm/yyyy
+  var dateString = date.toLocaleDateString();
+
   if (isLoading) return <LoadingSpinner />;
 
   if (isError) {
@@ -34,16 +46,17 @@ const SettingsPage = () => {
   }
   return (
     <div className='container mx-auto mb-24'>
+      {/* Left side */}
       <div className='mt-10'>
         <h1>User settings</h1>
         <div className='mt-10'>
-          <div className='grid grid-cols-4 gap-4 '>
+          <div className='grid grid-cols-4 gap-4'>
             <div className='col-span-2 '>
               <div className='bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
                 <div className='flex p-2'>
-                  <div>
+                  <div className='mt-3'>
                     <img
-                      className='w-36 h-36 rounded'
+                      className='w-36 h-36 rounded ml-2'
                       src={data.image}
                       alt='Profile image'
                     />
@@ -60,9 +73,9 @@ const SettingsPage = () => {
                         xmlns='http://www.w3.org/2000/svg'
                       >
                         <path
-                          stroke-linecap='round'
-                          stroke-linejoin='round'
-                          stroke-width='2'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth='2'
                           d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12'
                         ></path>
                       </svg>
@@ -71,21 +84,33 @@ const SettingsPage = () => {
                   </div>
 
                   <div className='ml-2'>
-                    <h2 className='font-semibold'>{data.name}</h2>
-                    <h3>
-                      <span>{data.email}</span>
-                    </h3>
-                    <div class='mb-6 mt-10'>
+                    <div className='grid grid-cols-4 gap-4'>
+                      <div className='col-span-2'>
+                        <h2 className='font-semibold'>{data.name}</h2>
+                        <h3>
+                          <span>{data.email}</span>
+                        </h3>
+                        <p>Join Date: {dateString}</p>
+                      </div>
+                      <div className='col-span-2 '>
+                        <div className='flex justify-end'>
+                          <button>
+                            <BiSave className='w-8 h-8 text-red-' />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='mb-6 mt-10'>
                       <label
-                        for='default-input'
-                        class='block mb-2  font-medium text-gray-900 dark:text-gray-300'
+                        htmlFor='short-bio-input'
+                        className='block mb-2  font-medium text-gray-900 dark:text-gray-300'
                       >
                         Short Bio
                       </label>
                       <input
                         type='text'
-                        id='default-input'
-                        value={data?.bio}
+                        id='short-bio-input'
+                        value={data?.short_bio}
                         className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                       />
                       <p className='text-gray-500 text-sm'>
@@ -98,17 +123,18 @@ const SettingsPage = () => {
               </div>
               <div className='col-span-2 mt-2'>
                 <div className='bg-white p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
-                  <h3 className='font-semibold'>Password information</h3>
-                  <div class='mb-6 mt-3'>
+                  <h3 className='font-semibold'>General information</h3>
+                  <div className='mb-6 mt-3'>
                     <label
-                      for='default-input'
-                      class='block mb-2 font-medium text-gray-900 dark:text-gray-300'
+                      htmlFor='about-me-input'
+                      className='block mb-2 font-medium text-gray-900 dark:text-gray-300'
                     >
-                      Current password
+                      About me
                     </label>
-                    <input
-                      type='password'
-                      id='default-input'
+                    <textarea
+                      type='text'
+                      rows='7'
+                      id='about-me-input'
                       value={data?.bio}
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                     />
@@ -117,17 +143,18 @@ const SettingsPage = () => {
                       byline. Max 160 characters.
                     </p>
                   </div>
-                  <div class='mb-6 mt-3'>
+
+                  <div className='mb-6 mt-3'>
                     <label
-                      for='default-input'
-                      class='block mb-2 font-medium text-gray-900 dark:text-gray-300'
+                      htmlFor='education-input'
+                      className='block mb-2 font-medium text-gray-900 dark:text-gray-300'
                     >
-                      New password
+                      Education
                     </label>
                     <input
-                      type='password'
-                      id='default-input'
-                      value={data?.bio}
+                      type='text'
+                      id='education-input'
+                      value={data?.education}
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                     />
                     <p className='text-gray-500 text-sm'>
@@ -135,17 +162,17 @@ const SettingsPage = () => {
                       byline. Max 160 characters.
                     </p>
                   </div>
-                  <div class='mb-6 mt-3'>
+                  <div className='mb-6 mt-3'>
                     <label
-                      for='default-input'
-                      class='block mb-2 font-medium text-gray-900 dark:text-gray-300'
+                      htmlFor='working-history-input'
+                      className='block mb-2 font-medium text-gray-900 dark:text-gray-300'
                     >
-                      Confirm password
+                      Work History
                     </label>
                     <input
-                      type='password'
-                      id='default-input'
-                      value={data?.bio}
+                      type='text'
+                      id='working-history-input'
+                      value={data?.work}
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                     />
                     <p className='text-gray-500 text-sm'>
@@ -156,110 +183,141 @@ const SettingsPage = () => {
                 </div>
               </div>
             </div>
-            <div className='col-span-2 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
-              <div className='p-2'>
-                <h3 className='font-semibold'>Social</h3>
-                <div className='grid grid-cols-2 gap-2 mt-2'>
-                  <div className='row-span-3'>
-                    <div class='mb-6'>
-                      <label
-                        for='default-input'
-                        class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      >
-                        Website
-                      </label>
-                      <input
-                        type='text'
-                        id='default-input'
-                        value={data?.UserSocialProfile[0]?.website}
-                        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                      />
+
+            {/* Right side */}
+
+            <div className='col-span-2'>
+              <div className='col-span-2'>
+                <div className='bg-white p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+                  <h3 className='font-semibold'>Skills</h3>
+                  <SkillsTags skills={skills} setSkills={setSkills} />
+                </div>
+              </div>
+              <div className='col-span-2 mt-2'>
+                <div className='bg-white p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+                  <h3 className='font-semibold'>Hobbies</h3>
+                  <HobbiesTags hobbies={hobbies} setHobbies={setHobbies} />
+                </div>
+              </div>
+              <div className='mt-2'>
+                <div className='p-2  bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+                  <h3 className='font-semibold'>Social</h3>
+                  <div className='grid grid-cols-2 gap-2 mt-2'>
+                    <div className='row-span-3'>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          Website
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.website}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          GitHub
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.github}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          Linkedin
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.linkedin}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          Discord
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.discord}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          Twitter
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.twitter}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
                     </div>
-                    <div class='mb-6'>
-                      <label
-                        for='default-input'
-                        class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      >
-                        GitHub
-                      </label>
-                      <input
-                        type='text'
-                        id='default-input'
-                        value={data?.UserSocialProfile[0]?.github}
-                        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                      />
-                    </div>
-                    <div class='mb-6'>
-                      <label
-                        for='default-input'
-                        class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      >
-                        Discord
-                      </label>
-                      <input
-                        type='text'
-                        id='default-input'
-                        value={data?.UserSocialProfile[0]?.discord}
-                        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                      />
-                    </div>
-                    <div class='mb-6'>
-                      <label
-                        for='default-input'
-                        class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      >
-                        Twitter
-                      </label>
-                      <input
-                        type='text'
-                        id='default-input'
-                        value={data?.UserSocialProfile[0]?.twitter}
-                        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                      />
-                    </div>
-                  </div>
-                  <div className='row-span-3'>
-                    <div class='mb-6'>
-                      <label
-                        for='default-input'
-                        class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      >
-                        Twitch
-                      </label>
-                      <input
-                        type='text'
-                        id='default-input'
-                        value={data?.UserSocialProfile[0]?.twitch}
-                        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                      />
-                    </div>
-                    <div class='mb-6'>
-                      <label
-                        for='default-input'
-                        class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      >
-                        Medium
-                      </label>
-                      <input
-                        type='text'
-                        id='default-input'
-                        value={data?.UserSocialProfile[0]?.medium}
-                        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                      />
-                    </div>
-                    <div class='mb-6'>
-                      <label
-                        for='default-input'
-                        class='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                      >
-                        Dev.io
-                      </label>
-                      <input
-                        type='text'
-                        id='default-input'
-                        value={data?.UserSocialProfile[0]?.dev}
-                        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                      />
+                    <div className='row-span-3'>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          Twitch
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.twitch}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          Medium
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.medium}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
+                      <div className='mb-6'>
+                        <label
+                          htmlFor='default-input'
+                          className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+                        >
+                          Dev.io
+                        </label>
+                        <input
+                          type='text'
+                          id='default-input'
+                          value={data?.UserSocialProfile[0]?.dev}
+                          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

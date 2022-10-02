@@ -53,7 +53,7 @@ const ProjectPage = () => {
             />
             <div className='relative inline-block'>
               <p>{data.user.name}</p>
-              <p className='text-gray-500 text-sm'>{data.user.bio}</p>
+              <p className='text-gray-500 text-sm'>{data.user.short_bio}</p>
               <p className='text-sm'>
                 Posted:{' '}
                 <span className='text-gray-500 text-sm'>

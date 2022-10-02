@@ -15,7 +15,7 @@ export default function ProjectCard({ prj }) {
           />
           <div className='relative inline-block'>
             <p>{prj.user.name}</p>
-            <p className='text-gray-500 text-sm'>{prj.user.bio}</p>
+            <p className='text-gray-500 text-sm'>{prj.user.short_bio}</p>
             <p className='text-sm'>
               Posted:{' '}
               <span className='text-gray-500 text-sm'>

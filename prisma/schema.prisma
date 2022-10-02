@@ -57,6 +57,11 @@ model User {
   emailVerified     DateTime?
   image             String?
   bio               String?
+  short_bio         String?
+  education         String?
+  work              String?
+  skills            String[]
+  hobbies           String[]
   // Foreign keys
   accounts          Account[]
   sessions          Session[]
@@ -65,17 +70,18 @@ model User {
 }
 
 model UserSocialProfile {
-  id      String  @id @default(cuid())
-  userId  String
-  discord String?
-  twitch  String?
-  website String?
-  github  String?
-  twitter String?
-  medium  String?
-  dev     String?
+  id       String  @id @default(cuid())
+  userId   String
+  discord  String?
+  linkedin String?
+  twitch   String?
+  website  String?
+  github   String?
+  twitter  String?
+  medium   String?
+  dev      String?
   // Foreign keys
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Project {
