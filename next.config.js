@@ -3,7 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['https://xsgames.co/', 'avatars.githubusercontent.com'],
+    domains: [
+      'https://xsgames.co/',
+      'avatars.githubusercontent.com',
+      'res.cloudinary.com',
+    ],
   },
 };
 

@@ -39,7 +39,7 @@ const DashboardPage = () => {
 
   return (
     <div className='container mx-auto mb-24'>
-      <div className='mt-10'>
+      <div className='mt-10 h-screen'>
         <h1>Personal Dashboard</h1>
         <div>
           {data.length === 0 && <h3>No projects to show</h3>}
