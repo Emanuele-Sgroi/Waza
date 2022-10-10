@@ -33,19 +33,11 @@ const SkillsTagsInput = ({ skills, setSkills, dataSkills, formChange }) => {
       <div className='relative z-0 mb-6 w-full group'>
         <input
           type='text'
-          name='floating_tag'
-          id='floating_tag'
-          className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer'
-          placeholder=' '
+          id='default-input'
           autoComplete='off'
           onKeyDown={handleKeyDown}
+          className='bg-gray-50 border mt-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
         />
-        <label
-          htmlFor='floating_tag'
-          className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
-        >
-          Skills
-        </label>
         <p className='text-sm text-gray-400 mt-2 mb-2'>
           Use the{' '}
           <kbd className='px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500'>
@@ -54,7 +46,7 @@ const SkillsTagsInput = ({ skills, setSkills, dataSkills, formChange }) => {
           command to separate tags. Limit: {skills.length}/10
         </p>
 
-        <div className='relative z-0 mb-6 w-full group'>
+        <div className='relative z-0 mt-5 mb-4 w-full group'>
           {skills.map((skill, index) => (
             <span
               id='badge-dismiss-red'

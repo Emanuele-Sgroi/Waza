@@ -1,20 +1,25 @@
 import Link from 'next/link';
 
 import { excerpt } from '../utils/util';
-import styles from '../styles/EventItem.module.css';
 
 export default function ProjectCard({ prj }) {
+  console.log('This is prj: ', prj);
   return (
-    <div className={styles.event}>
-      <div className={styles.info}>
+    <div className='bg-white pt-3 pb-3 pl-5 mt-5 grid grid-cols-6 gap-4 p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+      <div className='col-span-5'>
         <div className='flex'>
-          <img
-            className='inline object-cover w-16 h-16 mr-2 rounded-full'
-            src={prj.user.image}
-            alt='Profile image'
-          />
+          <Link href={`/user/${prj.userId}`}>
+            <img
+              className='inline cursor-pointer object-cover w-16 h-16 mr-2 rounded-full'
+              src={prj.user.image}
+              alt='Profile image'
+            />
+          </Link>
+
           <div className='relative inline-block'>
-            <p>{prj.user.name}</p>
+            <p>
+              <Link href={`/user/${prj.userId}`}>{prj.user.name}</Link>
+            </p>
             <p className='text-gray-500 text-sm'>{prj.user.short_bio}</p>
             <p className='text-sm'>
               Posted:{' '}
@@ -58,7 +63,7 @@ export default function ProjectCard({ prj }) {
         </div>
       </div>
 
-      <div className={styles.link}>
+      <div className='col-span-1 self-center'>
         <Link href={`/projects/${prj.id}`}>
           <button
             type='button'

@@ -34,8 +34,8 @@ const ProjectPage = () => {
   }
 
   return (
-    <div className='container mx-auto mb-24'>
-      <div className='mt-10'>
+    <div className='container mx-auto mb-24 h-screen'>
+      <div className='mt-10 '>
         <h1>Projects</h1>
         <div>
           {data.length === 0 && <h3>No projects to show</h3>}

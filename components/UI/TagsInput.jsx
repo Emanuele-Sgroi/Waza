@@ -38,8 +38,12 @@ function TagsInput({ tags, setTags }) {
         >
           Tags
         </label>
-        <p className='text-sm text-gray-400'>
-          Use the CTRL command to separate tags. Limit: {tags.length}/10
+        <p className='text-sm text-gray-400 mt-2'>
+          Use the{' '}
+          <kbd className='px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500'>
+            Ctrl
+          </kbd>{' '}
+          command to separate tags. Limit: {tags.length}/10
         </p>
         <div className='mt-2'>
           {tags.map((tag, index) => (

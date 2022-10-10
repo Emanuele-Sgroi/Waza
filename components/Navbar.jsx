@@ -26,8 +26,8 @@ const Navbar = () => {
   return (
     <header className='sticky top-0 z-50 w-full flex justify-between items-center border-b-2 bg-white border-gray-150 py-2 px-4'>
       <div className='w-[100px] md:w-[130px]'>
-        <Link href='/'>
-          <a className='hover:text-red-700 text-lg ml-5'>技 | Waza</a>
+        <Link href='/' className='hover:text-red-700 text-lg ml-5'>
+          技 | Waza
         </Link>
       </div>
 
