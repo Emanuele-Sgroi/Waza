@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { excerpt } from '../utils/util';
 
 export default function ProjectCard({ prj }) {
-  console.log('This is prj: ', prj);
   return (
     <div className='bg-white pt-3 pb-3 pl-5 mt-5 grid grid-cols-6 gap-4 p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
       <div className='col-span-5'>
