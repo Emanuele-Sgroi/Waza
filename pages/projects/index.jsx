@@ -24,7 +24,8 @@ const ProjectPage = () => {
 
   const { isLoading, isError, data, error } = useQuery(
     ['projects'],
-    fetchGetAllProjects
+    fetchGetAllProjects,
+    { refetchOnWindowFocus: true }
   );
 
   if (isLoading) return <LoadingSpinner />;

@@ -9,11 +9,17 @@ import Footer from '../components/Footer';
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const getLayout = Component.getLayout || (page => page);
 
-  const queryCLient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: true,
+      },
+    },
+  });
 
   return getLayout(
     <>
-      <QueryClientProvider client={queryCLient}>
+      <QueryClientProvider client={queryClient}>
         <SessionProvider session={session}>
           <Navbar />
           <Component {...pageProps} />
