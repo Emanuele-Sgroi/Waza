@@ -15,7 +15,7 @@ const ProgressionBar = ({ progression }) => {
           style={{ width: '14.28%' }}
         ></div>
       )}
-      {progression === 'design & prototype' && (
+      {progression === 'design and prototyping' && (
         <div
           className='bg-green-600 h-2.5 animate-pulse rounded-full'
           style={{ width: '28.56%' }}
@@ -39,7 +39,7 @@ const ProgressionBar = ({ progression }) => {
           style={{ width: '71.4%' }}
         ></div>
       )}
-      {progression === 'operations & maintenance' && (
+      {progression === 'operations and maintenance' && (
         <div
           className='bg-green-600 h-2.5 animate-pulse rounded-full'
           style={{ width: '85.68%' }}

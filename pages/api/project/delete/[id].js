@@ -1,8 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '../../../../utils/prisma';
 
 export default async function main(req, res) {
-  const prisma = new PrismaClient();
-
   const { id } = req.query;
 
   try {

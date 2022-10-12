@@ -51,9 +51,8 @@ const ProjectPage = () => {
     fetchGetProjectByID
   );
 
-  //TODO: Create a boolean useState hook, this will set true if data.userID === nextAuth.userID and delete/update
   //? Delete Project Mutation
-  const userDeleteMutation = async data => {
+  const userDeleteMutation = async () => {
     const response = await fetch(`/api/project/delete/${id}`, {
       method: 'DELETE',
       headers: {
