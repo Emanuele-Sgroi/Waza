@@ -1,6 +1,8 @@
-import { useState } from 'react';
-
-const TechnologyStackInput = ({ technology_stack, setTechStack }) => {
+const TechnologyStackInput = ({
+  technology_stack,
+  setTechStack,
+  setTechStackValid,
+}) => {
   function handleKeyDown(e) {
     if (e.key !== 'Control') return;
     const value = e.target.value.toLowerCase();
@@ -11,6 +13,7 @@ const TechnologyStackInput = ({ technology_stack, setTechStack }) => {
     // If statement to check if the tags array is less than 10 and check if the value is inside the array tags
     if (technology_stack.length !== 10 && !technology_stack.includes(value)) {
       setTechStack([...technology_stack, value]);
+      setTechStackValid(true);
     } else {
       return;
     }
@@ -38,14 +41,14 @@ const TechnologyStackInput = ({ technology_stack, setTechStack }) => {
         >
           Technology Stack
         </label>
-        <p className='text-sm text-gray-400 mt-2'>
+        <p className='text-sm text-gray-500 mt-2'>
           Use the{' '}
           <kbd className='px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500'>
             Ctrl
           </kbd>{' '}
           command to separate tags. Limit: {technology_stack.length}/10
         </p>
-        <div>
+        <div className='mt-2'>
           {technology_stack.map((stack, index) => (
             <span
               id='badge-dismiss-red'

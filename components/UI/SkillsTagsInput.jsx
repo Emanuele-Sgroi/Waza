@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-const SkillsTagsInput = ({ skills, setSkills }) => {
+const SkillsTagsInput = ({ skills, setSkills, setSkillsValid }) => {
   function handleKeyDown(e) {
     if (e.key !== 'Control') return;
     const value = e.target.value.toLowerCase();
@@ -11,6 +9,7 @@ const SkillsTagsInput = ({ skills, setSkills }) => {
     // If statement to check if the tags array is less than 10 and check if the value is inside the array tags
     if (skills.length !== 10 && !skills.includes(value)) {
       setSkills([...skills, value]);
+      setSkillsValid(true);
     } else {
       return;
     }
@@ -38,14 +37,14 @@ const SkillsTagsInput = ({ skills, setSkills }) => {
         >
           Skills
         </label>
-        <p className='text-sm text-gray-400 mt-2'>
+        <p className='text-sm text-gray-500 mt-2'>
           Use the{' '}
           <kbd className='px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500'>
             Ctrl
           </kbd>{' '}
           command to separate tags. Limit: {skills.length}/10
         </p>
-        <div className='relative z-0 mb-6 w-full group'>
+        <div className='mt-2'>
           {skills.map((skill, index) => (
             <span
               id='badge-dismiss-red'

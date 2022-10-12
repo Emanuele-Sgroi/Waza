@@ -15,7 +15,7 @@ import SkillsTag from '../../components/UI/SkillsTagsInput';
 
 const CreatePage = () => {
   const router = useRouter();
-  // Form useState
+  // Form useState hooks
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState([]);
   const [description, setDescription] = useState('');
@@ -33,6 +33,9 @@ const CreatePage = () => {
   const [figma, setFigma] = useState('');
   const [trello, setTrello] = useState('');
   const [notion, setNotion] = useState('');
+  const [tagsValid, setTagsValid] = useState(false);
+  const [techStackValid, setTechStackValid] = useState(false);
+  const [skillsValid, setSkillsValid] = useState(false);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -84,7 +87,10 @@ const CreatePage = () => {
           </Link>
         </div>
         <h1 className='mt-5'>Add Project</h1>
-        <form className='mt-5' onSubmit={handleSubmit}>
+        <form
+          className='mt-5 bg-white p-5 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'
+          onSubmit={handleSubmit}
+        >
           <div>
             <h2>Project Details</h2>
             <div className='mt-2 relative z-0 mb-6 w-full group'>
@@ -100,10 +106,16 @@ const CreatePage = () => {
                   name='title'
                   id='title'
                   value={title}
+                  required
                   onChange={e => setTitle(e.target.value)}
                   className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   placeholder=' '
                 />
+                <div className='mt-2'>
+                  <p className='text-sm text-gray-500'>
+                    Use this as a title for your project.
+                  </p>
+                </div>
               </div>
             </div>
             <div className='relative z-0 mb-6 w-full group'>
@@ -119,25 +131,38 @@ const CreatePage = () => {
                 id='description'
                 value={description}
                 rows='4'
-                onChange={e => setDescription(e.target.value)}
+                required
+                onChange={e => {
+                  setDescription(e.target.value);
+                }}
                 className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                 placeholder='Project Description...'
               />
-              <p className='text-sm text-gray-400'>
-                {description.length}/500 Characters
-              </p>
+              <div className='mt-2'>
+                <p className='text-sm text-gray-500'>
+                  Insert a meaningful, giving insight of what you would like to
+                  accomplish and the end goal.
+                </p>
+              </div>
             </div>
             <div className='grid md:grid-cols-3 md:gap-6'>
-              <TagsInput tags={tags} setTags={setTags} />
+              <TagsInput
+                tags={tags}
+                setTags={setTags}
+                setTagsValid={setTagsValid}
+              />
+
               <SkillsTag
                 className='relative z-0 mb-6 w-full group'
                 skills={skills}
                 setSkills={setSkills}
+                setSkillsValid={setSkillsValid}
               />
               <TechnologyStack
                 className='relative z-0 mb-6 w-full group'
                 technology_stack={technology_stack}
                 setTechStack={setTechStack}
+                setTechStackValid={setTechStackValid}
               />
             </div>
             <div className='grid md:grid-cols-3 md:gap-6'>
@@ -171,6 +196,11 @@ const CreatePage = () => {
                   </option>
                   <option value='end of support'>End of Support</option>
                 </select>
+                <div className='mt-2'>
+                  <p className='text-sm text-gray-500'>
+                    This is used to indicate the current status of your project.
+                  </p>
+                </div>
               </div>
               <div className='relative z-0 mb-6 w-full group'>
                 <label htmlFor='difficulty_level' className='sr-only'>
@@ -191,6 +221,11 @@ const CreatePage = () => {
                   <option value='hard'>Hard</option>
                   <option value='jedi'>Jedi</option>
                 </select>
+                <div className='mt-2'>
+                  <p className='text-sm text-gray-500'>
+                    How difficult your project is?
+                  </p>
+                </div>
               </div>
               <div className='z-0 mb-6 w-full group'>
                 <label
@@ -208,7 +243,11 @@ const CreatePage = () => {
                   className='ml-5 bg-gray-50 border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500  w-25 p-2.5 dark:bg-red-700 dark:border-red-600 dark:placeholder-red-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                   placeholder=''
                 />
-                <p className='text-sm text-gray-400'>Leave 0 for N/A</p>
+                <div className='mt-2'>
+                  <p className='text-sm text-gray-500'>
+                    Use 0 if you do not know how many people you might need.
+                  </p>
+                </div>
               </div>
             </div>
             <div className='grid grid-cols-2 gap-4'>
@@ -278,6 +317,7 @@ const CreatePage = () => {
                       type='text'
                       id='gitHub'
                       value={github}
+                      required
                       onChange={e => setGithub(e.target.value)}
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500'
                       placeholder='GitHub'
@@ -339,12 +379,29 @@ const CreatePage = () => {
               </div>
             </div>
           </div>
-          <button
-            type='submit'
-            className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
-          >
-            Submit
-          </button>
+          {!title ||
+          !description ||
+          !development_status ||
+          !difficulty_level ||
+          !github ||
+          !tagsValid ||
+          !techStackValid ||
+          !skillsValid ? (
+            <button
+              type='submit'
+              disabled
+              className='text-white bg-gradient-to-r from-red-400 via-red-400 to-red-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-400 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+            >
+              Submit
+            </button>
+          ) : (
+            <button
+              type='submit'
+              className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+            >
+              Submit
+            </button>
+          )}
         </form>
       </div>
     </div>

@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-function TagsInput({ tags, setTags }) {
+function TagsInput({ tags, setTags, setTagsValid }) {
   function handleKeyDown(e) {
     if (e.key !== 'Control') return;
     const value = e.target.value.toLowerCase();
@@ -11,6 +9,7 @@ function TagsInput({ tags, setTags }) {
     // If statement to check if the tags array is less than 10 and check if the value is inside the array tags
     if (tags.length !== 10 && !tags.includes(value)) {
       setTags([...tags, value]);
+      setTagsValid(true);
     } else {
       return;
     }
@@ -18,6 +17,13 @@ function TagsInput({ tags, setTags }) {
 
   function removeTag(index) {
     setTags(tags.filter((el, i) => i !== index));
+    checkArrayLength(tags);
+  }
+
+  function checkArrayLength(array) {
+    if (!array.length > 0) {
+      setTagsValid(false);
+    }
   }
 
   return (
@@ -36,9 +42,9 @@ function TagsInput({ tags, setTags }) {
           htmlFor='floating_tag'
           className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
         >
-          Tags
+          Project Tags
         </label>
-        <p className='text-sm text-gray-400 mt-2'>
+        <p className='text-sm text-gray-500 mt-2'>
           Use the{' '}
           <kbd className='px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500'>
             Ctrl
