@@ -44,19 +44,19 @@ export default async function main(req, res) {
       },
       developmentTool: {
         create: {
-          github: github,
-          jira: jira,
-          figma: figma,
-          trello: trello,
-          notion: notion,
+          github: github || undefined,
+          jira: jira || undefined,
+          figma: figma || undefined,
+          trello: trello || undefined,
+          notion: notion || undefined,
         },
       },
       communication: {
         create: {
-          discord: discord,
-          twitch: twitch,
-          twitter: twitter,
-          slack: slack,
+          discord: discord || undefined,
+          twitch: twitch || undefined,
+          twitter: twitter || undefined,
+          slack: slack || undefined,
         },
       },
     },

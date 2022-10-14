@@ -1,16 +1,18 @@
-import prisma from '../../../utils/prisma';
+import prisma from '../../../../utils/prisma';
 
 export default async function main(req, res) {
   const { id } = req.query;
 
   try {
-    const projects = await prisma.user.findUnique({
+    const projects = await prisma.project.findUnique({
       where: {
         id: id,
       },
       include: {
         // Doing a Join
-        UserSocialProfile: true,
+        developmentTool: true,
+        communication: true,
+        user: true,
       },
     });
 
