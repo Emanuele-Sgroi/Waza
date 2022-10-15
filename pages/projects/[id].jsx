@@ -4,6 +4,7 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { Dialog, Transition } from '@headlessui/react';
+import Giscus from '@giscus/react';
 
 import ProgressionBar from '../../components/ProgressionBar';
 import DevelopmentToolsCard from '../../components/DevelopmentToolsCard';
@@ -202,6 +203,29 @@ const ProjectPage = () => {
                   <h3 className='font-semibold'>Development</h3>
                   <DevelopmentToolsCard devTools={data.developmentTool[0]} />
                 </div>
+              </div>
+            </div>
+
+            <div className='mt-10'>
+              <div>
+                <h2>Comments</h2>
+              </div>
+              <div>
+                <Giscus
+                  id='comments'
+                  repo='giscus/giscus-component'
+                  repoId='MDEwOlJlcG9zaXRvcnkzOTEzMTMwMjA='
+                  category='Announcements'
+                  categoryId='DIC_kwDOF1L2fM4B-hVS'
+                  mapping='specific'
+                  term='Welcome to @giscus/react component!'
+                  reactionsEnabled='1'
+                  emitMetadata='0'
+                  inputPosition='top'
+                  theme='light'
+                  lang='en'
+                  loading='lazy'
+                />
               </div>
             </div>
 

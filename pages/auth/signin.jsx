@@ -31,7 +31,7 @@ export default function SignIn({ providers }) {
               </h2>
 
               <p className='mt-3 text-gray-500 dark:text-gray-300'>
-                Sign in to access your account
+                Sign in to access or create your account
               </p>
             </div>
 
@@ -52,7 +52,7 @@ export default function SignIn({ providers }) {
                 </div>
               ))}
 
-              <p className='mt-6 text-sm text-center text-gray-400'>
+              {/* <p className='mt-6 text-sm text-center text-gray-400'>
                 Don&#x27;t have an account yet?{' '}
                 <a
                   href='#'
@@ -61,7 +61,7 @@ export default function SignIn({ providers }) {
                   Sign up
                 </a>
                 .
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
