@@ -218,7 +218,7 @@ const ProjectPage = () => {
           </div>
           <div className='m-5 mb-32'>
             <div>
-              <h2 className='font-semibold'>
+              <h2>
                 Status:{' '}
                 {data.development_status !== 'cancelled' && (
                   <span className='capitalize text-green-500'>
@@ -234,12 +234,12 @@ const ProjectPage = () => {
               <ProgressionBar progression={data.development_status} />
             </div>
             <div className='mt-10'>
-              <h2 className='font-semibold'>Description</h2>
+              <h2>Description</h2>
               <p className='whitespace-pre-line'>{data.description}</p>
             </div>
-            <div className='mt-5 grid grid-cols-3 gap-4 ml-10'>
+            <div className='mt-5 grid grid-cols-3 gap-4'>
               <div className='mt-5'>
-                <h2 className='font-semibold'>Technology stack</h2>
+                <h2>Technology stack</h2>
                 {data.technology_stack.length === 0 && <p>No required</p>}
                 <ul className='space-y-1 max-w-md list-disc list-inside text-gray-500 dark:text-gray-400'>
                   {data.technology_stack.map(tech => (
@@ -250,9 +250,7 @@ const ProjectPage = () => {
                 </ul>
               </div>
               <div className='mt-5'>
-                <h2 className='mb-2 font-semibold text-gray-900 dark:text-white'>
-                  Skills required
-                </h2>
+                <h2>Skills required</h2>
                 {data.skills.length === 0 && <p>No required</p>}
                 <ul className='space-y-1 max-w-md list-disc list-inside text-gray-500 dark:text-gray-400'>
                   {data.skills.map(skill => (
@@ -263,20 +261,20 @@ const ProjectPage = () => {
                 </ul>
               </div>
               <div className='mt-5'>
-                <h2 className='font-semibold'>Team #</h2>
+                <h2>Team #</h2>
                 {data.team_need.length === 0 && <p>N/A</p>}
                 <p>{data.team_need}</p>
               </div>
             </div>
             <div className='mt-10'>
-              <h2 className='font-semibold'>Tools</h2>
+              <h2>Tools</h2>
               <div className='mt-5 grid grid-cols-2 gap-4'>
                 <div>
-                  <h3 className='font-semibold'>Collaborate</h3>
+                  <h4 className='font-semibold'>Collaborate</h4>
                   <CommunicationToolsCard commTools={data.communication[0]} />
                 </div>
                 <div>
-                  <h3 className='font-semibold'>Development</h3>
+                  <h4 className='font-semibold'>Development</h4>
                   <DevelopmentToolsCard devTools={data.developmentTool[0]} />
                 </div>
               </div>
