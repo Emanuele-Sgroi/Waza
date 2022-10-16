@@ -1,15 +1,16 @@
-import { Fragment, useState } from 'react';
 import Link from 'next/link';
+import { useState, Fragment } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Dialog, Transition } from '@headlessui/react';
 import Giscus from '@giscus/react';
+import { Transition, Dialog } from '@headlessui/react';
 
 import ProgressionBar from '../../components/ProgressionBar';
 import DevelopmentToolsCard from '../../components/DevelopmentToolsCard';
 import CommunicationToolsCard from '../../components/CommunicationToolsCard';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import SettingsUI from '../../components/ProjectUI/Settings';
 
 const ProjectPage = () => {
   // State for modal
@@ -22,7 +23,6 @@ const ProjectPage = () => {
   function openModal() {
     setIsOpen(true);
   }
-
   const { data: session } = useSession();
 
   const router = useRouter();
@@ -78,7 +78,7 @@ const ProjectPage = () => {
 
   return (
     <>
-      <div className='container mx-auto mb-24 h-screen '>
+      <div className='container mx-auto mb-24 h-screen'>
         <div className='bg-white mt-16 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
           <div className='m-5 grid grid-cols-2 gap-4'>
             <div>
@@ -132,12 +132,88 @@ const ProjectPage = () => {
               </div>
             </div>
             <div className='flex justify-end'>
-              <p>
-                Level of difficulty:{' '}
-                <span className='capitalize  text-gray-500'>
-                  {data.difficulty_level}
-                </span>
-              </p>
+              <div className='flex'>
+                <SettingsUI
+                  session={session}
+                  data={data}
+                  id={id}
+                  mutation={mutation}
+                  openModal={openModal}
+                />
+                <Transition appear show={isOpen} as={Fragment}>
+                  <Dialog
+                    as='div'
+                    className='relative z-10'
+                    onClose={closeModal}
+                  >
+                    <Transition.Child
+                      as={Fragment}
+                      enter='ease-out duration-300'
+                      enterFrom='opacity-0'
+                      enterTo='opacity-100'
+                      leave='ease-in duration-200'
+                      leaveFrom='opacity-100'
+                      leaveTo='opacity-0'
+                    >
+                      <div className='fixed inset-0 bg-black bg-opacity-25' />
+                    </Transition.Child>
+
+                    <div className='fixed inset-0 overflow-y-auto'>
+                      <div className='flex min-h-full items-center justify-center p-4 text-center'>
+                        <Transition.Child
+                          as={Fragment}
+                          enter='ease-out duration-300'
+                          enterFrom='opacity-0 scale-95'
+                          enterTo='opacity-100 scale-100'
+                          leave='ease-in duration-200'
+                          leaveFrom='opacity-100 scale-100'
+                          leaveTo='opacity-0 scale-95'
+                        >
+                          <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                            <Dialog.Title
+                              as='h3'
+                              className='text-lg font-bold leading-6 text-red-500'
+                            >
+                              Delete Project
+                            </Dialog.Title>
+                            <Dialog.Description>
+                              This will permanently delete your project
+                            </Dialog.Description>
+                            <div className='mt-2'>
+                              <p className='text-sm text-gray-500'>
+                                Are you sure you want to delete your project?
+                                All of the data will be permanently removed.
+                                This action cannot be undone.
+                              </p>
+                            </div>
+
+                            <div className='mt-4'>
+                              <button
+                                className='mr-3 inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
+                                onClick={mutation.mutate}
+                              >
+                                Delete
+                              </button>
+                              <button
+                                className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+                                onClick={closeModal}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </Dialog.Panel>
+                        </Transition.Child>
+                      </div>
+                    </div>
+                  </Dialog>
+                </Transition>
+                <p className='mt-1.5'>
+                  Level of difficulty:{' '}
+                  <span className='capitalize  text-gray-500'>
+                    {data.difficulty_level}
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
           <div className='m-5 mb-32'>
@@ -207,131 +283,27 @@ const ProjectPage = () => {
             </div>
 
             <div className='mt-10'>
+              <h2>Comments</h2>
               <div>
-                <h2>Comments</h2>
-              </div>
-              <div>
-                <Giscus
-                  id='comments'
-                  repo='giscus/giscus-component'
-                  repoId='MDEwOlJlcG9zaXRvcnkzOTEzMTMwMjA='
-                  category='Announcements'
-                  categoryId='DIC_kwDOF1L2fM4B-hVS'
-                  mapping='specific'
-                  term='Welcome to @giscus/react component!'
-                  reactionsEnabled='1'
-                  emitMetadata='0'
-                  inputPosition='top'
-                  theme='light'
-                  lang='en'
-                  loading='lazy'
-                />
-              </div>
-            </div>
-
-            {session && session.user.email == data.user.email ? (
-              <div className='mt-10'>
-                <h2 className='font-semibold text-orange-500'>
-                  Project settings
-                </h2>{' '}
-                <div className='ml-10 mt-5'>
-                  <ul>
-                    <li>
-                      <span className='mr-5'>Update project</span>
-                      <Link href={`/projects/update/${id}`}>
-                        <button className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
-                          <a>Update</a>
-                        </button>
-                      </Link>
-                    </li>
-                    <li className='mt-2'>
-                      <span className='mr-5 text-red-700 font-bold'>
-                        DELETE PROJECT
-                      </span>
-
-                      <button
-                        onClick={openModal}
-                        type='button'
-                        className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400'
-                      >
-                        <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
-                          <a>Delete</a>
-                        </span>
-                      </button>
-                      <Transition appear show={isOpen} as={Fragment}>
-                        <Dialog
-                          as='div'
-                          className='relative z-10'
-                          onClose={closeModal}
-                        >
-                          <Transition.Child
-                            as={Fragment}
-                            enter='ease-out duration-300'
-                            enterFrom='opacity-0'
-                            enterTo='opacity-100'
-                            leave='ease-in duration-200'
-                            leaveFrom='opacity-100'
-                            leaveTo='opacity-0'
-                          >
-                            <div className='fixed inset-0 bg-black bg-opacity-25' />
-                          </Transition.Child>
-
-                          <div className='fixed inset-0 overflow-y-auto'>
-                            <div className='flex min-h-full items-center justify-center p-4 text-center'>
-                              <Transition.Child
-                                as={Fragment}
-                                enter='ease-out duration-300'
-                                enterFrom='opacity-0 scale-95'
-                                enterTo='opacity-100 scale-100'
-                                leave='ease-in duration-200'
-                                leaveFrom='opacity-100 scale-100'
-                                leaveTo='opacity-0 scale-95'
-                              >
-                                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
-                                  <Dialog.Title
-                                    as='h3'
-                                    className='text-lg font-medium leading-6 text-gray-900'
-                                  >
-                                    Delete Project
-                                  </Dialog.Title>
-                                  <Dialog.Description>
-                                    This will permanently deactivate your
-                                    project
-                                  </Dialog.Description>
-                                  <div className='mt-2'>
-                                    <p className='text-sm text-gray-500'>
-                                      Are you sure you want to delete your
-                                      project? All of the data will be
-                                      permanently removed. This action cannot be
-                                      undone.
-                                    </p>
-                                  </div>
-
-                                  <div className='mt-4'>
-                                    <button
-                                      className='mr-3 inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                                      onClick={mutation.mutate}
-                                    >
-                                      Delete
-                                    </button>
-                                    <button
-                                      className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                                      onClick={closeModal}
-                                    >
-                                      Cancel
-                                    </button>
-                                  </div>
-                                </Dialog.Panel>
-                              </Transition.Child>
-                            </div>
-                          </div>
-                        </Dialog>
-                      </Transition>
-                    </li>
-                  </ul>
+                <div>
+                  <Giscus
+                    id='comments'
+                    repo='giscus/giscus-component'
+                    repoId='MDEwOlJlcG9zaXRvcnkzOTEzMTMwMjA='
+                    category='Announcements'
+                    categoryId='DIC_kwDOF1L2fM4B-hVS'
+                    mapping='specific'
+                    term='Welcome to @giscus/react component!'
+                    reactionsEnabled='1'
+                    emitMetadata='0'
+                    inputPosition='top'
+                    theme='light'
+                    lang='en'
+                    loading='lazy'
+                  />
                 </div>
               </div>
-            ) : null}
+            </div>
           </div>
         </div>
       </div>
