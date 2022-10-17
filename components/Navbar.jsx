@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Dropdown } from 'flowbite-react';
+import { Menu, Transition } from '@headlessui/react';
+
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { BiSearch } from 'react-icons/bi';
 
@@ -84,9 +86,9 @@ const Navbar = () => {
               </li>
               <li>
                 {session.user?.image ? (
-                  <>
-                    <Dropdown
-                      label={
+                  <Menu as='div' className='relative inline-block text-left'>
+                    <div>
+                      <Menu.Button className='inline-flex w-full justify-center rounded-md bg-opacity-20 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
                         <Image
                           width={50}
                           height={50}
@@ -94,36 +96,91 @@ const Navbar = () => {
                           src={session.user?.image}
                           alt='Profile Photo'
                         />
-                      }
-                      arrowIcon={false}
-                      inline={true}
+                      </Menu.Button>
+                    </div>
+
+                    <Transition
+                      as={Fragment}
+                      enter='transition ease-out duration-100'
+                      enterFrom='transform opacity-0 scale-95'
+                      enterTo='transform opacity-100 scale-100'
+                      leave='transition ease-in duration-75'
+                      leaveFrom='transform opacity-100 scale-100'
+                      leaveTo='transform opacity-0 scale-95'
                     >
-                      <Dropdown.Header>
-                        <span className='block text-sm'>
-                          {session.user?.name}
-                        </span>
-                        <span className='block truncate text-sm font-bold'>
-                          {session.user?.email}
-                        </span>
-                      </Dropdown.Header>
-                      <Link href='/dashboard'>
-                        <span>
-                          <Dropdown.Item>Dashboard</Dropdown.Item>
-                        </span>
-                      </Link>
-                      <Link href='/settings'>
-                        <span>
-                          <Dropdown.Item>Settings</Dropdown.Item>
-                        </span>
-                      </Link>
-                      <Dropdown.Divider />
-                      <Dropdown.Item
-                        onClick={() => signOut({ callbackUrl: '/' })}
-                      >
-                        Sign out
-                      </Dropdown.Item>
-                    </Dropdown>
-                  </>
+                      <Menu.Items className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                        <div className='p-3'>
+                          <span className='block text-sm'>
+                            {session.user?.name}
+                          </span>
+                          <span className='block truncate text-sm font-bold'>
+                            {session.user?.email}
+                          </span>
+                        </div>
+                        <div className='px-1 py-1 '>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <div>
+                                <Link href={`/dashboard`}>
+                                  <button
+                                    className={`${
+                                      active
+                                        ? 'bg-orange-400 text-white'
+                                        : 'text-gray-900'
+                                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                  >
+                                    Dashboard
+                                  </button>
+                                </Link>
+                              </div>
+                            )}
+                          </Menu.Item>
+                        </div>
+                        <div className='px-1 py-1 '>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <div>
+                                <Link href={`/settings`}>
+                                  <button
+                                    className={`${
+                                      active
+                                        ? 'bg-orange-400 text-white'
+                                        : 'text-gray-900'
+                                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                  >
+                                    Settings
+                                  </button>
+                                </Link>
+                              </div>
+                            )}
+                          </Menu.Item>
+                        </div>
+
+                        <div className='px-1 py-1'>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <div>
+                                <Link href={`/settings`}>
+                                  <button
+                                    onClick={() =>
+                                      signOut({ callbackUrl: '/' })
+                                    }
+                                    className={`${
+                                      active
+                                        ? 'bg-red-500 text-white'
+                                        : 'text-red-900'
+                                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                  >
+                                    Logout
+                                  </button>
+                                </Link>
+                              </div>
+                            )}
+                          </Menu.Item>
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
                 ) : (
                   <div className='overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600'>
                     <svg

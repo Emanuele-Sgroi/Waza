@@ -36,7 +36,7 @@ export default function SettingsBar({ session, data, id, openModal }) {
                         <button
                           className={`${
                             active
-                              ? 'bg-orange-500 text-white'
+                              ? 'bg-orange-400 text-white'
                               : 'text-gray-900'
                           } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                         >

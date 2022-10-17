@@ -3,8 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import '../styles/globals.css';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Layout from '../components/Layout';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const getLayout = Component.getLayout || (page => page);
@@ -21,9 +20,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     <>
       <QueryClientProvider client={queryClient}>
         <SessionProvider session={session}>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </SessionProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
