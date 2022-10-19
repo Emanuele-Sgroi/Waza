@@ -2,28 +2,51 @@ import { useState, Fragment } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Dropdown } from 'flowbite-react';
 import { Menu, Transition } from '@headlessui/react';
+import { useQuery } from '@tanstack/react-query';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { BiSearch } from 'react-icons/bi';
 
 const Navbar = () => {
-  const [searchValue, setSearchValue] = useState('');
+  const [search, setSearch] = useState('');
 
   // NextAuth.JS session
   const { data: session } = useSession();
 
   const router = useRouter();
 
-  // TODO: Implement Search functionality
-  const handleSearch = e => {
+  const handleSearch = async e => {
     e.preventDefault();
 
-    if (searchValue) {
-      router.push(`/search/${searchValue}`);
+    try {
+      const response = await fetch(`/api/search/test`, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log('Response: ', response);
+
+      const dataJSON = await response.json();
+      return await dataJSON;
+    } catch (error) {
+      console.error(error);
     }
+
+    // if (searchValue) {
+    //   router.push(`/search/search?term=${searchValue}`);
+    // }
   };
+
+  const { isLoading, isError, data, error } = useQuery(
+    ['search'],
+    handleSearch
+  );
+
+  // console.log('This is data: ', data);
 
   return (
     <header className='sticky top-0 z-50 w-full flex justify-between items-center border-b-2 bg-white border-gray-150 py-2 px-4'>
@@ -40,8 +63,8 @@ const Navbar = () => {
         >
           <input
             type='text'
-            value={searchValue}
-            onChange={e => setSearchValue(e.target.value)}
+            value={search}
+            onChange={e => setSearch(e.target.value)}
             placeholder='Search projects...'
             className='bg-gray-100 p-2 md:text-sm font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full md:top-0'
           />
@@ -88,7 +111,7 @@ const Navbar = () => {
                 {session.user?.image ? (
                   <Menu as='div' className='relative inline-block text-left'>
                     <div>
-                      <Menu.Button className='inline-flex w-full justify-center rounded-md bg-opacity-20 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+                      <Menu.Button className='inline-flex w-full justify-center bg-opacity-20 text-sm font-medium text-white hover:bg-opacity-100 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black'>
                         <Image
                           width={50}
                           height={50}

@@ -20,7 +20,7 @@ const UpdatePage = () => {
   const fetchGetProject = async () => {
     try {
       const response = await fetch(`/api/project/update/${id}`, {
-        method: 'PUT',
+        method: 'GET',
       });
 
       if (!response.ok) {
@@ -44,7 +44,6 @@ const UpdatePage = () => {
   //? Update data
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log('target: ', event);
     // let title = event.target[0].value;
     // let description = event.target[1].value;
     // let teamNeed = event.target[17].value;

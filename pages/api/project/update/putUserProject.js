@@ -41,31 +41,48 @@ export default async function main(req, res) {
         description: description,
         team_need: teamMemberNumber,
         developmentTool: {
-          updateMany: {
-            data: {
-              github: github || undefined,
-              jira: jira || undefined,
-              figma: figma || undefined,
-              trello: trello || undefined,
-              notion: notion || undefined,
+          upsert: [
+            {
+              create: {
+                github: github,
+                jira: jira,
+                figma: figma,
+                trello: trello,
+                notion: notion,
+              },
+              update: {
+                github: github || undefined,
+                jira: jira || undefined,
+                figma: figma || undefined,
+                trello: trello || undefined,
+                notion: notion || undefined,
+              },
+              where: {
+                id: id,
+              },
             },
-            where: {
-              id: id,
-            },
-          },
+          ],
         },
         communication: {
-          updateMany: {
-            data: {
-              discord: discord || undefined,
-              twitch: twitch || undefined,
-              twitter: twitter || undefined,
-              slack: slack || undefined,
+          upsert: [
+            {
+              create: {
+                discord: discord || undefined,
+                twitch: twitch || undefined,
+                twitter: twitter || undefined,
+                slack: slack || undefined,
+              },
+              update: {
+                discord: discord || undefined,
+                twitch: twitch || undefined,
+                twitter: twitter || undefined,
+                slack: slack || undefined,
+              },
+              where: {
+                id: id,
+              },
             },
-            where: {
-              id: id,
-            },
-          },
+          ],
         },
       },
     });

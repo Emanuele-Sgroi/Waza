@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Head from 'next/head';
 import { useState, Fragment } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -79,6 +80,9 @@ const ProjectPage = () => {
   return (
     <>
       <div className='container mx-auto mb-24 h-screen'>
+        <Head>
+          <title>{data.title}</title>
+        </Head>
         <div className='bg-white mt-16 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
           <div className='m-5 grid grid-cols-2 gap-4'>
             <div>
