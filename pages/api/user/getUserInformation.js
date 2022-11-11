@@ -12,7 +12,7 @@ export default async function main(req, res) {
       },
       include: {
         // Doing a Join
-        UserSocialProfile: true,
+        userSocialProfile: true,
       },
     });
 

@@ -84,7 +84,7 @@ const SettingsPage = () => {
   // Send user Short Bio to backend
   const onUserSectionSubmit = userData => {
     userData.preventDefault();
-    mutation.mutate({ short_bio: userData.target[2].value });
+    mutation.mutate({ short_bio: userData.target[1].value });
     // Once sending the data set short bio to empty
     setShortBio('');
   };
@@ -130,14 +130,16 @@ const SettingsPage = () => {
   // Send Work History to backend
   const onSocialSubmit = userData => {
     userData.preventDefault();
-    let website = userData.target[1].value;
-    let github = userData.target[2].value;
-    let linkedin = userData.target[3].value;
-    let discord = userData.target[4].value;
-    let twitch = userData.target[5].value;
-    let medium = userData.target[6].value;
-    let dev = userData.target[7].value;
-    let twitter = userData.target[8].value;
+
+    let website = userData.target[2].value;
+    let github = userData.target[3].value;
+    let linkedin = userData.target[4].value;
+    let discord = userData.target[5].value;
+    let twitch = userData.target[6].value;
+    let medium = userData.target[7].value;
+    let dev = userData.target[8].value;
+    let twitter = userData.target[9].value;
+
     mutation.mutate({
       website,
       github,
@@ -217,7 +219,7 @@ const SettingsPage = () => {
                           </label>
                         </div>
 
-                        {shortBio && data?.short_bio.length ? (
+                        {shortBio ? (
                           <div className='col-span-2'>
                             <div className='flex justify-end'>
                               <button
@@ -267,7 +269,7 @@ const SettingsPage = () => {
                           </label>
                         </div>
 
-                        {aboutMe && data?.bio.length ? (
+                        {aboutMe ? (
                           <div className='col-span-2'>
                             <div className='flex justify-end'>
                               <button
@@ -306,7 +308,7 @@ const SettingsPage = () => {
                             Education
                           </label>
                         </div>
-                        {education && data?.education.length ? (
+                        {education ? (
                           <div className='col-span-2'>
                             <div className='flex justify-end'>
                               <button
@@ -346,7 +348,7 @@ const SettingsPage = () => {
                             Work History
                           </label>
                         </div>
-                        {workHistory && data?.work.length ? (
+                        {workHistory ? (
                           <div className='col-span-2'>
                             <div className='flex justify-end'>
                               <button
@@ -439,16 +441,17 @@ const SettingsPage = () => {
                                   as='h3'
                                   className='text-lg font-bold leading-6 text-red-500'
                                 >
-                                  Delete Project
+                                  Delete Account
                                 </Dialog.Title>
                                 <Dialog.Description>
-                                  This will permanently delete your project
+                                  This will permanently delete your account
                                 </Dialog.Description>
                                 <div className='mt-2'>
                                   <p className='text-sm text-gray-500'>
                                     Are you sure you want to delete your
-                                    project? All of the data will be permanently
-                                    removed. This action cannot be undone.
+                                    account? All of the data will be permanently
+                                    removed.{' '}
+                                    <b>This action cannot be undone.</b>
                                   </p>
                                 </div>
 
@@ -571,7 +574,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.website}
+                          defaultValue={data?.userSocialProfile[0]?.website}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />
@@ -586,7 +589,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.github}
+                          defaultValue={data?.userSocialProfile[0]?.github}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />
@@ -601,7 +604,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.linkedin}
+                          defaultValue={data?.userSocialProfile[0]?.linkedin}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />
@@ -616,7 +619,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.discord}
+                          defaultValue={data?.userSocialProfile[0]?.discord}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />
@@ -633,7 +636,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.twitch}
+                          defaultValue={data?.userSocialProfile[0]?.twitch}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />
@@ -648,7 +651,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.medium}
+                          defaultValue={data?.userSocialProfile[0]?.medium}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />
@@ -663,7 +666,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.dev}
+                          defaultValue={data?.userSocialProfile[0]?.dev}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />
@@ -678,7 +681,7 @@ const SettingsPage = () => {
                         <input
                           type='text'
                           id='default-input'
-                          defaultValue={data?.UserSocialProfile[0]?.twitter}
+                          defaultValue={data?.userSocialProfile[0]?.twitter}
                           onChange={() => setFormDefaultValue(true)}
                           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                         />

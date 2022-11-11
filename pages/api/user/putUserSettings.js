@@ -6,8 +6,6 @@ export default async function main(req, res) {
 
   const session = await getSession({ req });
 
-  console.log('data: ', data);
-
   // Update Short Bio
   if (Object.keys(data) == 'short_bio') {
     const result = await prisma.user.update({
@@ -94,28 +92,30 @@ export default async function main(req, res) {
 
   // Update Hobbies
   if (Object.keys(data)) {
-    const result = await prisma.user.update({
+    const result = await prisma.userSocialProfile.upsert({
       where: {
-        email: session?.user?.email,
+        userId: data?.userId,
       },
-      data: {
-        UserSocialProfile: {
-          update: {
-            where: {
-              userId: data?.userId,
-            },
-            data: {
-              website: data?.website,
-              github: data?.github,
-              linkedin: data?.linkedin,
-              discord: data?.discord,
-              twitch: data?.twitch,
-              medium: data?.medium,
-              dev: data?.dev,
-              twitter: data?.twitter,
-            },
-          },
-        },
+      update: {
+        website: data?.website,
+        github: data?.github,
+        linkedin: data?.linkedin,
+        discord: data?.discord,
+        twitch: data?.twitch,
+        medium: data?.medium,
+        dev: data?.dev,
+        twitter: data?.twitter,
+      },
+      create: {
+        website: data?.website,
+        github: data?.github,
+        linkedin: data?.linkedin,
+        discord: data?.discord,
+        twitch: data?.twitch,
+        medium: data?.medium,
+        dev: data?.dev,
+        twitter: data?.twitter,
+        userId: data?.userId,
       },
     });
 

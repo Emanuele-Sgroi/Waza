@@ -67,22 +67,22 @@ model User {
   accounts          Account[]
   sessions          Session[]
   project           Project[]
-  UserSocialProfile UserSocialProfile[]
+  userSocialProfile UserSocialProfile[]
 }
 
 model UserSocialProfile {
-  id       String  @id @default(cuid())
-  userId   String  @unique
-  discord  String?
-  linkedin String?
-  twitch   String?
-  website  String?
-  github   String?
-  twitter  String?
-  medium   String?
-  dev      String?
-  // Foreign keys
-  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id       String @id @default(cuid())
+  userId   String @unique
+  discord  String
+  linkedin String
+  twitch   String
+  website  String
+  github   String
+  twitter  String
+  medium   String
+  dev      String
+
+  User User @relation(fields: [userId], references: [id])
 }
 
 model Project {

@@ -39,6 +39,8 @@ const ProjectPage = () => {
       <div className='mt-10 '>
         <h1>Projects</h1>
         <div className='grid grid-col-3 grid-flow-col gap-4'>
+          {/* 
+          //TODO: Implement popular tags
           <div className='col-span-1 mt-5'>
             <p className='font-semibold'>Popular Tags</p>
             <div className='inline-block relative py-1 text-xs'>
@@ -56,7 +58,7 @@ const ProjectPage = () => {
                 <span>&nbsp;</span>
               </span>
             </div>
-          </div>
+          </div> */}
           <div className='col-span-3'>
             {data.length === 0 && <h3>No projects to show</h3>}
             {data.map(prj => (

@@ -215,11 +215,21 @@ const CreatePage = () => {
                   <option value='DEFAULT' disabled>
                     Difficulty Level
                   </option>
-                  <option value='newbie'>Newbie</option>
-                  <option value='easy'>Easy</option>
-                  <option value='medium'>Medium</option>
-                  <option value='hard'>Hard</option>
-                  <option value='jedi'>Jedi</option>
+                  <option className='text-blue-500' value='newbie'>
+                    Newbie
+                  </option>
+                  <option className='text-green-500' value='easy'>
+                    Easy
+                  </option>
+                  <option className='text-yellow-500' value='medium'>
+                    Medium
+                  </option>
+                  <option className='text-red-500' value='hard'>
+                    Hard
+                  </option>
+                  <option className='text-purple-500' value='jedi'>
+                    Jedi
+                  </option>
                 </select>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
