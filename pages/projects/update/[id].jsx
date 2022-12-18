@@ -66,8 +66,11 @@ const UpdatePage = () => {
           id,
           title,
           description,
-          developmentStatus,
-          difficulty,
+          developmentStatus:
+            developmentStatus.length > 0
+              ? developmentStatus
+              : void developmentStatus,
+          difficulty: difficulty.length > 0 ? difficulty : void difficulty,
           teamNeed,
           discord,
           twitch,
