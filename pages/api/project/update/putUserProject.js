@@ -5,6 +5,8 @@ export default async function main(req, res) {
     id,
     title,
     description,
+    developmentStatus,
+    difficulty,
     teamNeed,
     discord,
     twitch,
@@ -15,10 +17,16 @@ export default async function main(req, res) {
     figma,
     trello,
     notion,
+    communicationId,
+    devToolsId,
   } = req.body;
   console.log(
     id,
-
+    title,
+    description,
+    developmentStatus,
+    difficulty,
+    teamNeed,
     discord,
     twitch,
     twitter,
@@ -27,7 +35,29 @@ export default async function main(req, res) {
     jira,
     figma,
     trello,
-    notion
+    notion,
+    communicationId,
+    devToolsId
+  );
+
+  console.log(
+    id,
+    title,
+    description,
+    developmentStatus,
+    difficulty,
+    teamNeed,
+    discord,
+    twitch,
+    twitter,
+    slack,
+    github,
+    jira,
+    figma,
+    trello,
+    notion,
+    communicationId,
+    devToolsId
   );
 
   const teamMemberNumber = parseInt(teamNeed, 10);
@@ -40,56 +70,41 @@ export default async function main(req, res) {
         title: title,
         description: description,
         team_need: teamMemberNumber,
+        development_status: developmentStatus,
+        difficulty_level: difficulty,
         developmentTool: {
-          upsert: [
-            {
-              create: {
-                github: github,
-                jira: jira,
-                figma: figma,
-                trello: trello,
-                notion: notion,
-              },
-              update: {
-                github: github || undefined,
-                jira: jira || undefined,
-                figma: figma || undefined,
-                trello: trello || undefined,
-                notion: notion || undefined,
-              },
-              where: {
-                id: id,
-              },
+          update: {
+            where: {
+              id: devToolsId,
             },
-          ],
+            data: {
+              github: github || '',
+              jira: jira || '',
+              figma: figma || '',
+              trello: trello || '',
+              notion: notion || '',
+            },
+          },
         },
         communication: {
-          upsert: [
-            {
-              create: {
-                discord: discord || undefined,
-                twitch: twitch || undefined,
-                twitter: twitter || undefined,
-                slack: slack || undefined,
-              },
-              update: {
-                discord: discord || undefined,
-                twitch: twitch || undefined,
-                twitter: twitter || undefined,
-                slack: slack || undefined,
-              },
-              where: {
-                id: id,
-              },
+          update: {
+            where: {
+              id: communicationId,
             },
-          ],
+            data: {
+              discord: discord || '',
+              twitch: twitch || '',
+              twitter: twitter || '',
+              slack: slack || '',
+            },
+          },
         },
       },
     });
 
     return await res.json(projects);
   } catch (err) {
-    console.error('Issue with Project[id]: ', err);
+    console.error('Issue with putUserProject: ', err);
     return res.status(err.code);
   }
 }

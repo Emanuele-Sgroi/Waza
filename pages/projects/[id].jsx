@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import axios from 'axios';
 import { useState, Fragment } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
@@ -31,20 +32,8 @@ const ProjectPage = () => {
 
   // Fetch project by using the URL ID
   const fetchGetProjectByID = async () => {
-    try {
-      const response = await fetch(`/api/project/${id}`, {
-        method: 'GET',
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const dataJSON = await response.json();
-      return await dataJSON;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await axios.get(`/api/project/${id}`);
+    return response.data;
   };
 
   // Destructure properties from useQuery

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
-import { BsGithub, BsTwitch } from 'react-icons/bs';
+import { BsChevronDoubleDown, BsGithub, BsTwitch } from 'react-icons/bs';
 import { FaTrello, FaJira, FaFigma, FaDiscord } from 'react-icons/fa';
 import { SiNotion } from 'react-icons/si';
 import { AiFillTwitterCircle, AiOutlineSlack } from 'react-icons/ai';
@@ -15,26 +16,21 @@ const UpdatePage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const [developmentStatus, setDevelopmentStatus] = useState('');
+  const [difficulty, setDifficulty] = useState('');
+
   //? Data Query
   // Fetch User information
   const fetchGetProject = async () => {
     try {
-      const response = await fetch(`/api/project/update/${id}`, {
-        method: 'GET',
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const dataJSON = await response.json();
-      return await dataJSON;
+      const response = await axios.get(`/api/project/update/${id}`);
+      return response.data;
     } catch (error) {
       console.error(error);
     }
   };
 
-  const { isLoading, isError, data, error } = useQuery(
+  const { isLoading, isError, data, error, status } = useQuery(
     ['projectData'],
     fetchGetProject
   );
@@ -44,18 +40,9 @@ const UpdatePage = () => {
   //? Update data
   const handleSubmit = async event => {
     event.preventDefault();
-    // let title = event.target[0].value;
-    // let description = event.target[1].value;
-    // let teamNeed = event.target[17].value;
-    // let discord = event.target[18].value;
-    // let twitch = event.target[19].value;
-    // let twitter = event.target[20].value;
-    // let slack = event.target[21].value;
-    // let github = event.target[22].value;
-    // let jira = event.target[23].value;
-    // let figma = event.target[24].value;
-    // let trello = event.target[25].value;
-    // let notion = event.target[26].value;
+
+    console.log('event: ', event);
+
     let title = event.target[0].value;
     let description = event.target[1].value;
     let teamNeed = event.target[4].value;
@@ -68,6 +55,10 @@ const UpdatePage = () => {
     let figma = event.target[11].value;
     let trello = event.target[12].value;
     let notion = event.target[13].value;
+    let communicationId = event.target[14].value;
+    let devToolsId = event.target[15].value;
+
+    console.log(communicationId, 'dev: ', devToolsId);
     try {
       const response = await fetch('/api/project/update/putUserProject', {
         method: 'PUT',
@@ -75,6 +66,8 @@ const UpdatePage = () => {
           id,
           title,
           description,
+          developmentStatus,
+          difficulty,
           teamNeed,
           discord,
           twitch,
@@ -85,6 +78,8 @@ const UpdatePage = () => {
           figma,
           trello,
           notion,
+          communicationId,
+          devToolsId,
         }),
         headers: {
           'content-Type': 'application/json',
@@ -175,7 +170,6 @@ const UpdatePage = () => {
             </div>
             <div className='grid md:grid-cols-3 md:gap-6'>
               {/* I need to fix Tags, Skills, and technology Stack */}
-              <p>Test</p>
             </div>
             <div className='grid md:grid-cols-3 md:gap-6'>
               <div className='relative z-0 mb-6 w-full group'>
@@ -184,6 +178,7 @@ const UpdatePage = () => {
                 </label>
                 <select
                   defaultValue={data.development_status}
+                  onChange={e => setDevelopmentStatus(e.target.value)}
                   id='development_status'
                   className='w-full h-10 pl-3 pr-6 text-base bg-gray-50 placeholder-gray-600 border rounded-lg appearance-none focus:ring-red-500 focus:border-red-500 focus:shadow-outline'
                 >
@@ -222,6 +217,7 @@ const UpdatePage = () => {
                 </label>
                 <select
                   defaultValue={data.difficulty_level}
+                  onChange={e => setDifficulty(e.target.value)}
                   id='difficulty_level'
                   className='w-full h-10 pl-3 pr-6 text-base bg-gray-50 placeholder-gray-600 border rounded-lg appearance-none focus:ring-red-500 focus:border-red-500 focus:shadow-outline'
                 >
@@ -274,7 +270,7 @@ const UpdatePage = () => {
             </div>
             <div className='grid grid-cols-2 gap-4'>
               <div>
-                <h2>Communication</h2>
+                <h2 id='communication_id'>Communication</h2>
                 <div className='relative z-0 mb-6 w-full group'>
                   <div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
                     <FaDiscord />
@@ -325,7 +321,7 @@ const UpdatePage = () => {
                 </div>
               </div>
               <div>
-                <h2>Development tools</h2>
+                <h2 id={data.developmentTool[0].id}>Development tools</h2>
                 <div>
                   <div className='relative z-0 mb-6 w-full group'>
                     <div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
@@ -389,6 +385,16 @@ const UpdatePage = () => {
                     placeholder='Notion'
                   />
                 </div>
+                <input
+                  hidden
+                  id='communication'
+                  defaultValue={data.communication[0].id}
+                />
+                <input
+                  hidden
+                  id='developmentTool'
+                  defaultValue={data.developmentTool[0].id}
+                />
               </div>
             </div>
           </div>

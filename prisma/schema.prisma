@@ -106,7 +106,7 @@ model Project {
 
 model DevelopmentTool {
   id        String  @id @default(cuid())
-  projectId String
+  projectId String  @unique
   github    String
   jira      String?
   figma     String?
@@ -118,7 +118,7 @@ model DevelopmentTool {
 
 model Communication {
   id        String  @id @default(cuid())
-  projectId String
+  projectId String  @unique
   discord   String?
   twitch    String?
   twitter   String?
