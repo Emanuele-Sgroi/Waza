@@ -3,13 +3,12 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, Transition } from '@headlessui/react';
-import { useQuery } from '@tanstack/react-query';
-
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { BiSearch } from 'react-icons/bi';
 
 const Navbar = () => {
   const [search, setSearch] = useState('');
+  const [searchValue, setSearchValue] = useState([]);
 
   // NextAuth.JS session
   const { data: session } = useSession();
@@ -20,7 +19,7 @@ const Navbar = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`/api/search/test`, {
+      const response = await fetch(`/api/search/${search}`, {
         method: 'GET',
       });
 
@@ -28,25 +27,20 @@ const Navbar = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      console.log('Response: ', response);
-
       const dataJSON = await response.json();
-      return await dataJSON;
+      console.log('This is dataJSON: ', dataJSON);
+      setSearchValue([dataJSON]);
+
+      if (searchValue.length > 0) {
+        console.log('Yay this is greater then 0');
+        router.push(`/search/search?term=${searchValue}`);
+      }
+
+      // return await dataJSON;
     } catch (error) {
       console.error(error);
     }
-
-    // if (searchValue) {
-    //   router.push(`/search/search?term=${searchValue}`);
-    // }
   };
-
-  const { isLoading, isError, data, error } = useQuery(
-    ['search'],
-    handleSearch
-  );
-
-  // console.log('This is data: ', data);
 
   return (
     <header className='sticky top-0 z-50 w-full flex justify-between items-center border-b-2 bg-white border-gray-150 py-2 px-4'>

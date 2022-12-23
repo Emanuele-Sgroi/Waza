@@ -17,7 +17,7 @@ export default function SignIn({ providers }) {
               <h2 className='text-4xl font-bold text-white'>技 | Waza</h2>
 
               <p className='max-w-xl mt-3 text-gray-300'>
-                Start building with your dream project. For free.
+                Start building your dream project. For free.
               </p>
             </div>
           </div>

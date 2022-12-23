@@ -1,7 +1,7 @@
 import prisma from '../../../utils/prisma';
 
 export default async function main(req, res) {
-  let searchText = req.query.search;
+  let searchText = req.query.slug;
 
   try {
     // All projects that contain the searched word as a title and description.
@@ -11,10 +11,10 @@ export default async function main(req, res) {
           contains: searchText.replace(/[\s\n\t]/g, '_'),
           mode: 'insensitive',
         },
-        description: {
-          contains: searchText.replace(/[\s\n\t]/g, '_'),
-          mode: 'insensitive',
-        },
+        // description: {
+        //   contains: searchText.replace(/[\s\n\t]/g, '_'),
+        //   mode: 'insensitive',
+        // },
       },
     });
 
@@ -24,6 +24,4 @@ export default async function main(req, res) {
     console.error('Issue with Search project: ', err);
     return res.status(err.code);
   }
-
-  return await res.json({ message: 'Error inside getUserInformation' });
 }
