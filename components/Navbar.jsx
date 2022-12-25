@@ -31,11 +31,6 @@ const Navbar = () => {
       console.log('This is dataJSON: ', dataJSON);
       setSearchValue([dataJSON]);
 
-      if (searchValue.length > 0) {
-        console.log('Yay this is greater then 0');
-        router.push(`/search/search?term=${searchValue}`);
-      }
-
       // return await dataJSON;
     } catch (error) {
       console.error(error);
