@@ -16,9 +16,11 @@ export default async function main(req, res) {
         //   mode: 'insensitive',
         // },
       },
+      include: {
+        user: true,
+      },
     });
 
-    console.log('search result: ', result);
     return await res.json(result);
   } catch (err) {
     console.error('Issue with Search project: ', err);

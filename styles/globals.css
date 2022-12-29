@@ -52,16 +52,6 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-}
-
 .tag-item {
   background-color: rgb(255, 255, 255);
   display: inline-block;

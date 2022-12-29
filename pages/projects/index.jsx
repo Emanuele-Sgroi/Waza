@@ -39,8 +39,7 @@ const ProjectPage = () => {
       }
 
       const dataJSON = await response.json();
-      console.log('This is dataJSON: ', dataJSON);
-      setSearchValue([dataJSON]);
+      setSearchValue(dataJSON);
 
       return await dataJSON;
     } catch (error) {
@@ -136,12 +135,22 @@ const ProjectPage = () => {
               </span>
             </div>
           </div> */}
-          <div className='col-span-3'>
-            {GetProjectData.length === 0 && <h3>No projects to show</h3>}
-            {GetProjectData.map(prj => (
-              <ProjectsCard key={prj.id} prj={prj} />
-            ))}
-          </div>
+          {
+            searchValue.length >= 1 ?  
+              <div className='col-span-3'>
+                {searchValue.map(prj => (
+                  <ProjectsCard key={prj.id} prj={prj} />
+                ))}
+              </div>
+           :    
+            <div className='col-span-3'>
+              {GetProjectData.length === 0 && <h3>No projects to show</h3>}
+              {GetProjectData.map(prj => (
+                <ProjectsCard key={prj.id} prj={prj} />
+              ))}
+            </div>
+          }
+
         </div>
       </div>
     </div>

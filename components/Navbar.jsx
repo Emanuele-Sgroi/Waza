@@ -7,35 +7,10 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import { BiSearch } from 'react-icons/bi';
 
 const Navbar = () => {
-  const [search, setSearch] = useState('');
-  const [searchValue, setSearchValue] = useState([]);
-
   // NextAuth.JS session
   const { data: session } = useSession();
 
-  const router = useRouter();
 
-  const handleSearch = async e => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(`/api/search/${search}`, {
-        method: 'GET',
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const dataJSON = await response.json();
-      console.log('This is dataJSON: ', dataJSON);
-      setSearchValue([dataJSON]);
-
-      // return await dataJSON;
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <header className='sticky top-0 z-50 w-full flex justify-between items-center border-b-2 bg-white border-gray-150 py-2 px-4'>
@@ -43,27 +18,6 @@ const Navbar = () => {
         <Link href='/' className='hover:text-red-700 text-lg ml-5'>
           技 | Waza
         </Link>
-      </div>
-
-      <div className='relative hidden md:block mt-1'>
-        <form
-          onSubmit={handleSearch}
-          className='absolute md:static top-10 bg-white'
-        >
-          <input
-            type='text'
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder='Search projects...'
-            className='bg-gray-100 p-2 md:text-sm font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full md:top-0'
-          />
-          <button
-            onClick={handleSearch}
-            className='absolute md:right-5 right-6 top-2.5 border-l-2 border-gray-300 pl-4 text-2xl text-gray-400'
-          >
-            <BiSearch />
-          </button>
-        </form>
       </div>
 
       <nav className='mr-5 mt-2'>
