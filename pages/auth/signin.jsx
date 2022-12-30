@@ -2,6 +2,7 @@ import { getProviders, signIn } from 'next-auth/react';
 import { BsGithub } from 'react-icons/bs';
 
 export default function SignIn({ providers }) {
+
   return (
     <div className='bg-white dark:bg-gray-900'>
       <div className='flex justify-center h-screen'>
