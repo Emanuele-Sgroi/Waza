@@ -68,7 +68,7 @@ const ProjectPage = () => {
 
   return (
     <>
-      <div className='container mx-auto mb-24 h-screen'>
+      <div className='container mx-auto mb-24'>
         <Head>
           <title>{data.title}</title>
         </Head>
@@ -272,10 +272,10 @@ const ProjectPage = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className='m-5'>
+          <h2>Comments</h2>
 
-            <div className='mt-10'>
-              <h2>Comments</h2>
-              <div className=''>
                 <Giscus
                   id='comments'
                   repo='giscus/giscus-component'
@@ -290,11 +290,10 @@ const ProjectPage = () => {
                   theme='light'
                   lang='en'
                   loading='lazy'
-                />
-              </div>
-            </div>
-          </div>
+                  />
+     
         </div>
+        </div>  
       </div>
     </>
   );
