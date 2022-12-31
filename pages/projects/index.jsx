@@ -112,7 +112,7 @@ const ProjectPage = () => {
                 </button>
               </div>
             </form>
-            <p className='text-sm font-sans text-gray-500'>P.S.: Type 'all' to show all project again!</p>
+            <p className='text-xs font-sans text-gray-500'>P.S.: Type 'all' to show all project again!</p>
           </div>
         </div>
         <div className='grid grid-col-3 grid-flow-col gap-4'>
