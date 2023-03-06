@@ -38,8 +38,9 @@ const ProjectPage = () => {
 
   // Destructure properties from useQuery
   const { isLoading, isError, data, error } = useQuery(
-    ['project'],
-    fetchGetProjectByID
+    ['project', id],
+    () => fetchGetProjectByID(id),
+    { enabled: !!id }
   );
 
   //? Delete Project Mutation
@@ -274,27 +275,26 @@ const ProjectPage = () => {
             </div>
           </div>
           <div className='m-5'>
-          <h2>Comments</h2>
+            <h2>Comments</h2>
 
-                <Giscus
-                  id='comments'
-                  repo='Amrod92/Waza'
-                  repoId='R_kgDOH6dOqQ'
-                  category='Comments'
-                  categoryId='DIC_kwDOH6dOqc4CTWDK'
-                  mapping='pathname'
-                  strict='0'
-                  term='Welcome to Waza!! Comments to share more informations'
-                  reactionsEnabled='1'
-                  emitMetadata='0'
-                  inputPosition='top'
-                  theme='light'
-                  lang='en'
-                  loading='lazy'
-                  />
-     
+            <Giscus
+              id='comments'
+              repo='Amrod92/Waza'
+              repoId='R_kgDOH6dOqQ'
+              category='Comments'
+              categoryId='DIC_kwDOH6dOqc4CTWDK'
+              mapping='pathname'
+              strict='0'
+              term='Welcome to Waza!! Comments to share more informations'
+              reactionsEnabled='1'
+              emitMetadata='0'
+              inputPosition='top'
+              theme='light'
+              lang='en'
+              loading='lazy'
+            />
+          </div>
         </div>
-        </div>  
       </div>
     </>
   );

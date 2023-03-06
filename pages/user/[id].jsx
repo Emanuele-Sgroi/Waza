@@ -29,8 +29,9 @@ const SettingsPage = () => {
   };
 
   const { isLoading, isError, data, error } = useQuery(
-    ['userData'],
-    fetchGetUserInformation
+    ['userData', id],
+    () => fetchGetUserInformation(id),
+    { enabled: !!id }
   );
 
   // Create data variable from the createdAt data
