@@ -51,7 +51,7 @@ function TagsInput({ tags, setTags, setTagsValid }) {
           </kbd>{' '}
           command to separate tags. Limit: {tags.length}/10
         </p>
-        <div className='mt-2'>
+        <div className='mt-2 flex flex-wrap'>
           {tags.map((tag, index) => (
             <span
               id='badge-dismiss-red'

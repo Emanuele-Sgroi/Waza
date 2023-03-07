@@ -20,7 +20,7 @@ const CommunicationToolsCard = ({ commTools }) => {
         )}
         {commTools.discord && (
           <li className='flex items-center'>
-            <FaDiscord className='text-[#7289da]' />
+            <FaDiscord className='text-[#7289da] md:text-[#7289da] lg:text-[#7289da] xl:text-[#7289da]' />
             <Link href={commTools.discord}>
               <a className='ml-1.5' target='_blank'>
                 Discord
@@ -30,7 +30,7 @@ const CommunicationToolsCard = ({ commTools }) => {
         )}
         {commTools.slack && (
           <li className='flex items-center'>
-            <AiOutlineSlack className='text-[#E01E5A]' />
+            <AiOutlineSlack className='text-[#E01E5A] md:text-[#E01E5A] lg:text-[#E01E5A] xl:text-[#E01E5A]' />
             <Link href={commTools.slack}>
               <a className='ml-1.5' target='_blank'>
                 Slack
@@ -40,7 +40,7 @@ const CommunicationToolsCard = ({ commTools }) => {
         )}
         {commTools.twitch && (
           <li className='flex items-center'>
-            <BsTwitch className='text-[#6441a5]' />
+            <BsTwitch className='text-[#6441a5] md:text-[#6441a5] lg:text-[#6441a5] xl:text-[#6441a5]' />
             <Link href={commTools.twitch}>
               <a className='ml-1.5' target='_blank'>
                 Twitch
@@ -50,7 +50,7 @@ const CommunicationToolsCard = ({ commTools }) => {
         )}
         {commTools.twitter && (
           <li className='flex items-center'>
-            <AiFillTwitterCircle className='text-[#1D9BF0]' />
+            <AiFillTwitterCircle className='text-[#1D9BF0] md:text-[#1D9BF0] lg:text-[#1D9BF0] xl:text-[#1D9BF0]' />
             <Link href={commTools.twitter}>
               <a className='ml-1.5' target='_blank'>
                 Twitter

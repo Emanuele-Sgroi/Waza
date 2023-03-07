@@ -33,7 +33,7 @@ function TagsInput({ tags, setTags, setTagsValid, dataTags }) {
       setTagsValid(false);
     }
   }
-  //
+
   return (
     <>
       <div className='relative z-0 mb-6 w-full group'>
@@ -59,7 +59,7 @@ function TagsInput({ tags, setTags, setTagsValid, dataTags }) {
           </kbd>{' '}
           command to separate tags. Limit: {tags.length}/10
         </p>
-        <div className='mt-2'>
+        <div className='mt-2 flex flex-wrap'>
           {tags.map((tag, index) => (
             <span
               id='badge-dismiss-red'

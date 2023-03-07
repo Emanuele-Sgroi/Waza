@@ -5,7 +5,7 @@ const LoadingSpinner = () => {
     <div className='text-center flex justify-center items-center h-screen'>
       <div role='status'>
         <svg
-          className='inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600'
+          className='inline mr-2 w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-gray-200 animate-spin dark:text-gray-600 fill-red-600'
           viewBox='0 0 100 101'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'

@@ -10,8 +10,6 @@ const Navbar = () => {
   // NextAuth.JS session
   const { data: session } = useSession();
 
-
-
   return (
     <header className='sticky top-0 z-50 w-full flex justify-between items-center border-b-2 bg-white border-gray-150 py-2 px-4'>
       <div className='w-[100px] md:w-[130px]'>
@@ -21,10 +19,10 @@ const Navbar = () => {
       </div>
 
       <nav className='mr-5 mt-2'>
-        <ul className='flex gap-5'>
+        <ul className='flex flex-col md:flex-row md:gap-5'>
           <li>
             <Link href='/projects'>
-              <button className='relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400'>
+              <button className='relative inline-flex items-center justify-center p-0.5 mb-2 md:mb-0 md:mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400'>
                 <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
                   <a>Explore</a>
                 </span>
@@ -36,14 +34,21 @@ const Navbar = () => {
             <li>
               <button
                 onClick={() => signIn(undefined)}
-                className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'
+                className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-4 py-2 block mx-auto w-full text-center mb-2'
               >
                 <a>Login</a>
               </button>
             </li>
           ) : (
             <>
-              <li>
+              <li className='sm:hidden'>
+                <Link href='/projects/create-project'>
+                  <button className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
+                    <a>Create Project</a>
+                  </button>
+                </Link>
+              </li>
+              <li className='hidden sm:block'>
                 <Link href='/projects/create-project'>
                   <button className='text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2'>
                     <a>Create Project</a>
@@ -54,7 +59,7 @@ const Navbar = () => {
                 {session.user?.image ? (
                   <Menu as='div' className='relative inline-block text-left'>
                     <div>
-                      <Menu.Button className='inline-flex w-full justify-center bg-opacity-20 text-sm font-medium text-white hover:bg-opacity-100 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black'>
+                      <Menu.Button className='inline-flex w-12 sm:w-16 md:w-20 justify-center bg-opacity-20 text-sm font-medium text-white hover:bg-opacity-100 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black'>
                         <Image
                           width={50}
                           height={50}
@@ -74,7 +79,7 @@ const Navbar = () => {
                       leaveFrom='transform opacity-100 scale-100'
                       leaveTo='transform opacity-0 scale-95'
                     >
-                      <Menu.Items className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                      <Menu.Items className='absolute right-0 mt-2 w-56 sm:w-64 md:w-72 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                         <div className='p-3'>
                           <span className='block text-sm'>
                             {session.user?.name}
@@ -83,7 +88,7 @@ const Navbar = () => {
                             {session.user?.email}
                           </span>
                         </div>
-                        <div className='px-1 py-1 '>
+                        <div className='px-1 py-1'>
                           <Menu.Item>
                             {({ active }) => (
                               <div>
@@ -102,7 +107,7 @@ const Navbar = () => {
                             )}
                           </Menu.Item>
                         </div>
-                        <div className='px-1 py-1 '>
+                        <div className='px-1 py-1'>
                           <Menu.Item>
                             {({ active }) => (
                               <div>
@@ -150,7 +155,7 @@ const Navbar = () => {
                 ) : (
                   <div className='overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600'>
                     <svg
-                      className='absolute -left-1 w-12 h-12 text-gray-400'
+                      className='absolute -left-1 w-12 h-12 text-gray-400 sm:w-16 sm:h-16 md:w-20 md:h-20'
                       fill='currentColor'
                       viewBox='0 0 20 20'
                       xmlns='http://www.w3.org/2000/svg'

@@ -36,7 +36,7 @@ const SkillsTagsInput = ({ skills, setSkills, dataSkills, formChange }) => {
           id='default-input'
           autoComplete='off'
           onKeyDown={handleKeyDown}
-          className='bg-gray-50 border mt-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+          className='bg-gray-50 border mt-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 sm:text-base'
         />
         <p className='text-sm text-gray-400 mt-2 mb-2'>
           Use the{' '}
@@ -51,12 +51,12 @@ const SkillsTagsInput = ({ skills, setSkills, dataSkills, formChange }) => {
             <span
               id='badge-dismiss-red'
               key={index}
-              className='inline-flex items-center mb-3 py-1 px-2 mr-2 text-sm font-medium text-red-800 bg-red-100 rounded dark:bg-red-200 dark:text-red-800'
+              className='inline-flex items-center mb-3 py-1 px-2 mr-2 text-sm font-medium text-red-800 bg-red-100 rounded dark:bg-red-200 dark:text-red-800 sm:text-base'
             >
               {skill}
               <button
                 type='button'
-                className='inline-flex items-center p-0.5 ml-2 text-sm text-red-400 bg-transparent rounded-sm hover:bg-red-200 hover:text-red-900 dark:hover:bg-red-300 dark:hover:text-red-900'
+                className='inline-flex items-center p-0.5 ml-2 text-sm text-red-400 bg-transparent rounded-sm hover:bg-red-200 hover:text-red-900 dark:hover:bg-red-300 dark:hover:text-red-900 sm:text-base'
                 data-dismiss-target='#badge-dismiss-red'
                 aria-label='Remove'
                 onClick={() => removeTag(index)}

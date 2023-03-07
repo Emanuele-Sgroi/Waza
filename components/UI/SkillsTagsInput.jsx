@@ -44,7 +44,7 @@ const SkillsTagsInput = ({ skills, setSkills, setSkillsValid }) => {
           </kbd>{' '}
           command to separate tags. Limit: {skills.length}/10
         </p>
-        <div className='mt-2'>
+        <div className='mt-2 flex flex-wrap'>
           {skills.map((skill, index) => (
             <span
               id='badge-dismiss-red'

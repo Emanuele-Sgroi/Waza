@@ -39,8 +39,8 @@ const DashboardPage = () => {
 
   return (
     <div className='container mx-auto mb-24 h-screen'>
-      <div className='mt-10'>
-        <h1>Personal Dashboard</h1>
+      <div className='mt-10 px-4'>
+        <h1 className='text-3xl mb-4'>Personal Dashboard</h1>
         <div>
           {data.length === 0 && <h3>No projects to show</h3>}
           {data.map(prj => (

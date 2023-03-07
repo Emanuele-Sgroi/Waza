@@ -183,11 +183,11 @@ const SettingsPage = () => {
   return (
     <div className='container mx-auto mb-24'>
       {/* Left side */}
-      <div className='mt-10 '>
-        <h1>User settings</h1>
+      <div className='mt-10 px-4 sm:px-6 lg:px-8'>
+        <h1 className='text-2xl font-semibold'>User settings</h1>
         <div className='mt-10'>
-          <div className='grid grid-cols-4 gap-4'>
-            <div className='col-span-2 '>
+          <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
+            <div className='md:col-span-2'>
               <div className='bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
                 <form className='flex p-2' onSubmit={onUserSectionSubmit}>
                   <div className='mt-3'>
@@ -197,20 +197,23 @@ const SettingsPage = () => {
                       alt='Profile image'
                     />
                   </div>
-
                   <div className='ml-5'>
-                    <div className='grid grid-cols-4 gap-4'>
-                      <div className='col-span-2'>
-                        <h2 className='font-semibold'>{data.name}</h2>
-                        <h3>
+                    <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
+                      <div className='md:col-span-2'>
+                        <h2 className='font-semibold text-lg md:text-xl'>
+                          {data.name}
+                        </h2>
+                        <h3 className='text-gray-500 text-sm'>
                           <span>{data.email}</span>
                         </h3>
-                        <time>Join Date: {dateString}</time>
+                        <time className='text-gray-500 text-sm'>
+                          Join Date: {dateString}
+                        </time>
                       </div>
                     </div>
                     <div className='mb-6 mt-10'>
-                      <div className='grid grid-cols-4 gap-4'>
-                        <div className='col-span-2'>
+                      <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
+                        <div className='md:col-span-2'>
                           <label
                             htmlFor='about-me-input'
                             className='block mb-2 font-medium text-gray-900 dark:text-gray-300'
@@ -218,9 +221,8 @@ const SettingsPage = () => {
                             Short Bio
                           </label>
                         </div>
-
                         {shortBio ? (
-                          <div className='col-span-2'>
+                          <div className='md:col-span-2'>
                             <div className='flex justify-end'>
                               <button
                                 type='submit'
@@ -481,13 +483,12 @@ const SettingsPage = () => {
             </div>
 
             {/* Right side */}
-
             <div className='col-span-2'>
               <form className='col-span-2' onSubmit={onSkillsSubmit}>
                 <div className='bg-white p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
                   <div className='grid grid-cols-4 gap-4'>
                     <div className='col-span-2'>
-                      <h3 className='font-semibold'>Skills</h3>
+                      <h3 className='font-semibold text-xl'>Skills</h3>
                     </div>
                     {formSkillsDefaultValue ? (
                       <div className='col-span-2'>
@@ -513,14 +514,17 @@ const SettingsPage = () => {
                   />
                 </div>
               </form>
-              <form className='col-span-2 mt-2' onSubmit={onHobbiesSubmit}>
+              <form
+                className='col-span-2 mt-2 md:col-span-1 lg:col-span-2'
+                onSubmit={onHobbiesSubmit}
+              >
                 <div className='bg-white p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
                   <div className='grid grid-cols-4 gap-4'>
                     <div className='col-span-2'>
                       <h3 className='font-semibold'>Hobbies</h3>
                     </div>
                     {formHobbiesDefaultValue ? (
-                      <div className='col-span-2'>
+                      <div className='col-span-2 md:col-span-1 lg:col-span-2'>
                         <div className='flex justify-end'>
                           <button
                             type='submit'
@@ -543,8 +547,9 @@ const SettingsPage = () => {
                   />
                 </div>
               </form>
-              <form className='mt-2' onSubmit={onSocialSubmit}>
-                <div className='p-2  bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+
+              <form className='mt-2 md:col-span-2' onSubmit={onSocialSubmit}>
+                <div className='bg-white p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
                   <div className='grid grid-cols-4 gap-4'>
                     <div className='col-span-2'>
                       <h3 className='font-semibold'>Social</h3>
