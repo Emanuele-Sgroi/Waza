@@ -15,3 +15,8 @@ export function excerpt(content, wordlimit) {
     return result;
   }
 }
+
+// Function to get current year
+export function currentYear() {
+  return new Date().getFullYear();
+}

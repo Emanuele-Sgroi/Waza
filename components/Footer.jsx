@@ -1,6 +1,7 @@
 import { AiFillTwitterCircle, AiOutlineInstagram } from 'react-icons/ai';
 import { FaDiscord } from 'react-icons/fa';
 import { BsGithub } from 'react-icons/bs';
+import { currentYear } from '../utils/util';
 
 export default function Footer() {
   return (
@@ -130,7 +131,7 @@ export default function Footer() {
         <div className='flex flex-wrap items-center md:justify-between justify-center'>
           <div className='w-full md:w-4/12 px-4 mx-auto text-center'>
             <div className='text-sm text-blueGray-500 font-semibold py-1'>
-              Copyright © <span id='get-current-year'>2022</span> by Waza
+              Copyright © {currentYear()} - Made with ❤️ by Waza
             </div>
           </div>
         </div>

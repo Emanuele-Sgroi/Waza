@@ -192,7 +192,7 @@ const SettingsPage = () => {
                 <form className='flex p-2' onSubmit={onUserSectionSubmit}>
                   <div className='mt-3'>
                     <img
-                      className='w-36 h-36 rounded ml-2'
+                      className='h-auto max-w-full rounded ml-2'
                       src={data.image}
                       alt='Profile image'
                     />

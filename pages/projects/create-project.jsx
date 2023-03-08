@@ -12,9 +12,15 @@ import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import TagsInput from '../../components/UI/TagsInput';
 import TechnologyStack from '../../components/UI/TechnologyStackInput';
 import SkillsTag from '../../components/UI/SkillsTagsInput';
+import { isMobileDevice } from '../../utils/device';
 
 const CreatePage = () => {
   const router = useRouter();
+
+  if (isMobileDevice(router.req)) {
+    router.push(`/projects`);
+  }
+
   // Form useState hooks
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState([]);
