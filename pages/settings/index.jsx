@@ -395,14 +395,15 @@ const SettingsPage = () => {
                     </div>
                     <div className='mt-5'>
                       <p>
-                        Once you delete your account and all of your content,
-                        there is no going back and cannot be undone. Please be
-                        certain.
+                        Once you delete your account all of its content will be
+                        deleted too, there is no way to undo this action. Please
+                        be certain that you want to proceed with account
+                        deletion.
                       </p>
 
                       <button
                         onClick={openModal}
-                        className='mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-red-500 font-bold rounded-lg group bg-gradient-to-br from-red-100 via-red-300 to-red-400 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400'
+                        className='mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm text-red-500 font-bold rounded-lg group bg-gradient-to-br from-red-100 via-red-300 to-red-400 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400'
                       >
                         <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0'>
                           Delete your account

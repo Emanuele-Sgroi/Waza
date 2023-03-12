@@ -40,7 +40,7 @@ const NavbarUserLogged = ({ session }) => {
               <div className='px-1 py-1 '>
                 <Menu.Item>
                   {({ active }) => (
-                    <div>
+                    <div className='hidden md:block lg:block'>
                       <Link href={`/projects/create-project`}>
                         <button
                           className={`${
