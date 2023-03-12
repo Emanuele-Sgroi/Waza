@@ -4,7 +4,11 @@ import { excerpt } from '../utils/util';
 
 export default function ProjectCard({ prj }) {
   return (
-    <div className='bg-white pt-3 pb-3 pl-5 mt-5 grid grid-cols-1 md:grid-cols-6 gap-4 p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+    <div
+      className='bg-white Class
+Properties
+m-5 pt-3 pb-3 pl-5 mt-5 grid grid-cols-1 md:grid-cols-6 gap-4 p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'
+    >
       <div className='md:col-span-5'>
         <div className='flex flex-col md:flex-row'>
           <a href={`/user/${prj.userId}`} className='md:mr-2'>
@@ -33,9 +37,11 @@ export default function ProjectCard({ prj }) {
           </div>
         </div>
 
-        <div className='mt-2'>
+        <div className='mt-3'>
           <div>
-            <h2 className='font-medium'>{prj.title}</h2>
+            <Link href={`/projects/${prj.id}`}>
+              <h2 className='font-medium cursor-pointer'>{prj.title}</h2>
+            </Link>
             <p>{excerpt(prj.description, 25)}...</p>
             <div className='flex flex-wrap mt-2'>
               {prj.tags.map(tag => (
@@ -74,30 +80,6 @@ export default function ProjectCard({ prj }) {
             </p>
           </div>
         </div>
-      </div>
-
-      <div className='col-span-1 self-center'>
-        <Link href={`/projects/${prj.id}`}>
-          <button
-            type='button'
-            className='md:mr-2 text-white inline-flex items-center bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-10 py-2.5 text-center mr-2 mb-2 sm:mr-0 sm:mb-0 sm:w-auto'
-          >
-            Project Details
-            <svg
-              aria-hidden='true'
-              className='ml-2 -mr-1 w-5 h-5'
-              fill='currentColor'
-              viewBox='0 0 20 20'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                fillRule='evenodd'
-                d='M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z'
-                clipRule='evenodd'
-              ></path>
-            </svg>
-          </button>
-        </Link>
       </div>
     </div>
   );
