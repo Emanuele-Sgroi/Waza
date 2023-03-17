@@ -71,7 +71,7 @@ function HeroSection({ scrollDown }) {
                   <Link href='/dashboard'>
                     <button
                       type='button'
-                      className='text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-md p-0.5 px-5 py-3 text-center mr-2 mb-2'
+                      className='text-white  bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-md p-0.5 px-5 py-3 text-center mr-2 mb-2'
                     >
                       Try Now for Free!
                     </button>

@@ -67,9 +67,9 @@ const ProjectPage = () => {
       <div className='mt-10'>
         <div className='grid grid-cols-1 md:grid-cols-2'>
           <div className='col-span-1 md:col-span-1'>
-            <h1 className='text-xl md:text-2xl'>Projects</h1>
+            <h1 className='text-3xl md:text-3xl ml-5'>Projects</h1>
           </div>
-          <div className='col-span-1 md:col-span-1'>
+          <div className='col-span-1 md:col-span-1 m-5'>
             <form>
               <label
                 htmlFor='default-search'

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { AiFillTwitterCircle } from 'react-icons/ai';
 import { CgPatreon } from 'react-icons/cg';
 import { FaDiscord } from 'react-icons/fa';
@@ -116,10 +117,15 @@ function Newsletter() {
                       <CgPatreon className='mr-2 -ml-1 w-6 h-5' />
                       Become a Patreon
                     </button>
-                    <button className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg py-2.5 mr-2 mb-2'>
-                      <FaDiscord className='mr-2 -ml-1 w-6 h-5' />
-                      Join us on Discord
-                    </button>
+                    <Link href='https://discord.gg/MREttBxk'>
+                      <a
+                        className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg py-2.5 mr-2 mb-2'
+                        target='_blank'
+                      >
+                        <FaDiscord className='mr-2 -ml-1 w-6 h-5' />
+                        Join us on Discord
+                      </a>
+                    </Link>
                   </div>
                   {/* Success message */}
                   {/* <p className="text-sm text-gray-400 mt-3">Thanks for subscribing!</p> */}
