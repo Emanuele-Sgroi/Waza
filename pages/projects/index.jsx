@@ -3,23 +3,28 @@ import { useState } from 'react';
 
 import ProjectsCard from '../../components/ProjectsCard';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import Pagination from '../../components/Pagination';
 
 const ProjectPage = () => {
   const [search, setSearch] = useState('');
   const [searchValue, setSearchValue] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchGetAllProjects = async () => {
     try {
-      const response = await fetch(`/api/project/getAllProjects`, {
-        method: 'GET',
-      });
+      const response = await fetch(
+        `/api/project/getAllProjects?page=${currentPage}`,
+        {
+          method: 'GET',
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const dataJSON = await response.json();
-      return await dataJSON;
+      return dataJSON;
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +46,7 @@ const ProjectPage = () => {
       const dataJSON = await response.json();
       setSearchValue(dataJSON);
 
-      return await dataJSON;
+      return dataJSON;
     } catch (error) {
       console.error(error);
     }
@@ -52,7 +57,7 @@ const ProjectPage = () => {
     isError: GetProjectIsError,
     data: GetProjectData,
     error: GetProjectError,
-  } = useQuery(['projects'], fetchGetAllProjects, {
+  } = useQuery(['projects', currentPage], fetchGetAllProjects, {
     refetchOnWindowFocus: true,
   });
 
@@ -61,6 +66,8 @@ const ProjectPage = () => {
   if (GetProjectIsError) {
     return <span>Error: {error.message}</span>;
   }
+
+  console.log('searchValue: ', searchValue);
 
   return (
     <div className='container mx-auto mb-10 md:mb-24 min-h-screen'>
@@ -118,18 +125,28 @@ const ProjectPage = () => {
           </div>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-8'>
-          {searchValue.length >= 1 ? (
+          {searchValue.result?.length >= 1 ? (
             <div className='col-span-3'>
-              {searchValue.map(prj => (
+              {searchValue.result.map(prj => (
                 <ProjectsCard key={prj.id} prj={prj} />
               ))}
+              <Pagination
+                prjData={searchValue}
+                setCurrentPage={setCurrentPage}
+              />
             </div>
           ) : (
             <div className='col-span-3'>
-              {GetProjectData.length === 0 && <h3>No projects to show</h3>}
-              {GetProjectData.map(prj => (
+              {GetProjectData.projects.length === 0 && (
+                <h3>No projects to show</h3>
+              )}
+              {GetProjectData.projects.map(prj => (
                 <ProjectsCard key={prj.id} prj={prj} />
               ))}
+              <Pagination
+                prjData={GetProjectData}
+                setCurrentPage={setCurrentPage}
+              />
             </div>
           )}
         </div>
