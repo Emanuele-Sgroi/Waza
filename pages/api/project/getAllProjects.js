@@ -7,6 +7,9 @@ export default async function main(req, res) {
   // Fetch and count the total project in the database
   const totalProjects = await prisma.project.count();
 
+  const SORTBY = req.query.sortBy;
+  const SORTDIRECTION = req.query.sortDirection;
+
   try {
     const projects = await prisma.project.findMany({
       skip: (page - 1) * PROJECTS_PER_PAGE,
@@ -17,7 +20,9 @@ export default async function main(req, res) {
         communication: true,
         user: true,
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: {
+        [SORTBY]: SORTDIRECTION,
+      },
     });
 
     // Calculate the total number of pages based on the totalProjects and PROJECTS_PER_PAGE constants
@@ -28,6 +33,4 @@ export default async function main(req, res) {
     console.error('Issue with getAllProjects: ', err);
     return res.status(err.code);
   }
-
-  return await res.json({ message: 'Error inside getProjectsByEmails' });
 }
