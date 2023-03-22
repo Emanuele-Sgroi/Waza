@@ -4,7 +4,7 @@ import { excerpt } from '../utils/util';
 
 export default function ProjectCard({ prj }) {
   return (
-    <div className='bg-white m-5 pt-3 pb-3 pl-5 mt-5 grid grid-cols-1 md:grid-cols-6 gap-4 p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+    <div className='bg-white m-5 pt-3 pb-3 pl-5 mt-5 grid grid-cols-1 md:grid-cols-6 gap-4 p-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 transition ease-in-out delay-300 hover:-translate-y-1 hover:scale-110 duration-700'>
       <div className='md:col-span-5'>
         <div className='flex flex-col md:flex-row'>
           <a href={`/user/${prj.userId}`} className='md:mr-2'>
@@ -36,7 +36,9 @@ export default function ProjectCard({ prj }) {
         <div className='mt-3'>
           <div>
             <Link href={`/projects/${prj.id}`}>
-              <h2 className='font-medium cursor-pointer'>{prj.title}</h2>
+              <span className='text-2xl font-medium cursor-pointer'>
+                {prj.title}
+              </span>
             </Link>
             <p>{excerpt(prj.description, 25)}...</p>
             <div className='flex flex-wrap mt-2'>

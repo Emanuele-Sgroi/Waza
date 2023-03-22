@@ -11,8 +11,8 @@ const ProjectPage = () => {
   const [search, setSearch] = useState('');
   const [searchValue, setSearchValue] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortingColumn, setSortingColumn] = useState('title');
-  const [sortingDirection, setSortingDirection] = useState('asc');
+  const [sortingColumn, setSortingColumn] = useState('createdAt');
+  const [sortingDirection, setSortingDirection] = useState('desc');
 
   const handleSortingChange = event => {
     const sortByValue = event.target.getAttribute('data-value');
@@ -83,7 +83,7 @@ const ProjectPage = () => {
   if (GetProjectLoading) return <LoadingSpinner />;
 
   if (GetProjectIsError) {
-    return <span>Error: {isError.message}</span>;
+    return <span>Error: {error.message}</span>;
   }
 
   return (
@@ -147,13 +147,14 @@ const ProjectPage = () => {
               <div className='justify-self-end'>
                 <p className='text-gray-500 inline-flex'>
                   Sort by:{' '}
-                  <span className='text-red-500'>
+                  <span className='text-red-500 ml-1.5'>
                     <a
                       aria-checked='false'
                       role='menuitemradio'
                       data-turbo-frame='_self'
                       onClick={handleSortingChange}
                       data-value={'title'}
+                      className='cursor-pointer'
                     >
                       Name{' '}
                     </a>
@@ -165,13 +166,14 @@ const ProjectPage = () => {
                     ) : null}
                   </span>{' '}
                   /{' '}
-                  <span className='text-red-500 '>
+                  <span className='text-red-500'>
                     <a
                       aria-checked='false'
                       role='menuitemradio'
                       data-turbo-frame='_self'
                       onClick={handleSortingChange}
                       data-value='createdAt'
+                      className='cursor-pointer'
                     >
                       Date{' '}
                     </a>
