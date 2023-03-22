@@ -28,6 +28,6 @@ The current tech stack with its relative documentation, tips and tricks can be f
 
 **Client:** React, Next.Js 12.2.5, TailwindCSS, NextAuth.js, React Icons, TanStack Query v4
 
-**Server:** Node, Express, Prisma, PostgreSQL, Railway
+**Server:** Node, Express, Prisma
 
 **Database & Hosting:** PostgreSQL, Railway, Vercel
