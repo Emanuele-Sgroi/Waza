@@ -113,10 +113,14 @@ function Newsletter() {
                       <AiFillTwitterCircle className='mr-2 -ml-1 w-6 h-5' />
                       Follow @Waza
                     </button> */}
-                    <button className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 rounded-lg py-2.5 mr-2 mb-2'>
+                    <a
+                      className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 rounded-lg py-2.5 mr-2 mb-2'
+                      href='https://github.com/sponsors/Amrod92'
+                      target='_blank'
+                    >
                       <SiGithubsponsors className='mr-2 -ml-1 w-6 h-5' />
                       Become a Sponsor!
-                    </button>
+                    </a>
                     <Link href='https://discord.gg/WqAjnrqJJ5'>
                       <a
                         className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg py-2.5 mr-2 mb-2'
