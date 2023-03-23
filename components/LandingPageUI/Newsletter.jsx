@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { AiFillTwitterCircle } from 'react-icons/ai';
-import { CgPatreon } from 'react-icons/cg';
+import { SiGithubsponsors } from 'react-icons/si';
 import { FaDiscord } from 'react-icons/fa';
 
 function Newsletter() {
@@ -102,22 +102,22 @@ function Newsletter() {
               <div className='text-center lg:text-left lg:max-w-xl'>
                 <h3 className='h3 text-white mb-2'>Join the Movement</h3>
                 <p className='text-gray-300 text-lg mb-6'>
-                  Join the global community of developers on Twitter and
-                  Discord, and support us on Patreon.
+                  Join the global community of developers on Discord, and become
+                  a Sponsor.
                 </p>
 
                 {/* CTA form */}
                 <form className='w-full lg:w-auto'>
                   <div className='flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0'>
-                    <button className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg py-2.5 mr-2 mb-2'>
+                    {/* <button className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg py-2.5 mr-2 mb-2'>
                       <AiFillTwitterCircle className='mr-2 -ml-1 w-6 h-5' />
                       Follow @Waza
+                    </button> */}
+                    <button className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-pink-500 via-pink-600 to-pink-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 rounded-lg py-2.5 mr-2 mb-2'>
+                      <SiGithubsponsors className='mr-2 -ml-1 w-6 h-5' />
+                      Become a Sponsor!
                     </button>
-                    <button className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 rounded-lg py-2.5 mr-2 mb-2'>
-                      <CgPatreon className='mr-2 -ml-1 w-6 h-5' />
-                      Become a Patreon
-                    </button>
-                    <Link href='https://discord.gg/MREttBxk'>
+                    <Link href='https://discord.gg/WqAjnrqJJ5'>
                       <a
                         className='w-55 h-12 px-5 mt-5 text-white text-center inline-flex items-center bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg py-2.5 mr-2 mb-2'
                         target='_blank'

@@ -26,24 +26,32 @@ export default function Footer() {
               href='/about'
               className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
             >
-              <a href='#' className='mr-4 hover:underline md:mr-6 '>
+              <a href='/about' className='mr-4 hover:underline md:mr-6 '>
                 About
               </a>
             </Link>
           </li>
           <li>
-            <a href='#' className='mr-4 hover:underline md:mr-6'>
-              Legal
-            </a>
+            <Link
+              href='/privacy'
+              className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
+            >
+              <a href='/privacy' className='mr-4 hover:underline md:mr-6'>
+                Privacy policy
+              </a>
+            </Link>
           </li>
           <li>
-            <a href='#' className='mr-4 hover:underline md:mr-6'>
+            <a
+              href='mailto: manlio92--@live.it'
+              className='mr-4 hover:underline md:mr-6'
+            >
               Contact
             </a>
           </li>
           <li className='mr-4 hover:underline md:mr-5'>
             <Link
-              href='#'
+              href='https://twitter.com/Amrod92'
               className='text-gray-500 hover:text-gray-900 dark:hover:text-white'
             >
               <a target='_blank'>

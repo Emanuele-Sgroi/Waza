@@ -58,28 +58,48 @@ function Testimonials() {
                   </svg>
                   <Image
                     className='relative rounded-full'
-                    src={TestimonialImage}
+                    src='https://pbs.twimg.com/profile_images/1590968738358079488/IY9Gx6Ok_400x400.jpg'
                     width='96'
                     height='96'
                     alt='Testimonial 01'
                   />
                 </div>
                 <blockquote className='text-xl font-medium mb-4'>
-                  “ I love this product and would recommend it to anyone. Could
-                  be not easier to use, and our multiple websites are wonderful.
-                  We get nice comments all the time. “
+                  “ When something is important enough, you do it even if the
+                  odds are not in your favor. “
                 </blockquote>
                 <cite className='block font-bold text-lg not-italic mb-1'>
-                  Joe Rogan
+                  Elon Musk
                 </cite>
                 <div className='text-gray-600'>
                   <span>CEO & Co-Founder</span>{' '}
                   <a
                     className='text-blue-600 hover:underline'
-                    href='https://open.spotify.com/show/4rOoJ6Egrf8K2IrywzwOMk'
+                    href='https://twitter.com/SpaceX'
                     target='_blank'
                   >
-                    @The Joe Rogan Experience
+                    @SpaceX
+                  </a>{' '}
+                  <a
+                    className='text-blue-600 hover:underline'
+                    href='https://twitter.com/Tesla'
+                    target='_blank'
+                  >
+                    @Tesla
+                  </a>{' '}
+                  <a
+                    className='text-blue-600 hover:underline'
+                    href='https://twitter.com/Twitter'
+                    target='_blank'
+                  >
+                    @Twitter
+                  </a>{' '}
+                  <a
+                    className='text-blue-600 hover:underline'
+                    href='https://twitter.com/boringcompany'
+                    target='_blank'
+                  >
+                    @The Boring Company
                   </a>
                 </div>
               </div>

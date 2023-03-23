@@ -73,7 +73,7 @@ const ProjectPage = () => {
         <Head>
           <title>{data.title}</title>
         </Head>
-        <div className='bg-white mt-16 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
+        <div className='bg-white mt-16 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 m-3'>
           <div className='m-5 grid grid-cols-2 gap-4'>
             <div>
               <div className='flex'>

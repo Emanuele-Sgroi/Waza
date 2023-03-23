@@ -39,7 +39,6 @@ const Navbar = () => {
                 width={30}
                 height={32}
                 fill='currentcolor'
-                style={{ display: 'block' }}
               />
             </div>
           </a>

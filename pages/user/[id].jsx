@@ -176,7 +176,13 @@ const SettingsPage = () => {
                       <h3 className='font-semibold'>Skills</h3>
                     </div>
                   </div>
-                  <UserSkillsTags dataSkills={data?.skills} />
+                  {data?.skills.length > 0 ? (
+                    <UserSkillsTags dataSkills={data?.skills} />
+                  ) : (
+                    <p className='m-4 text-gray-500'>
+                      No skills to show at the moment
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -187,7 +193,13 @@ const SettingsPage = () => {
                       <h3 className='font-semibold'>Hobbies</h3>
                     </div>
                   </div>
-                  <UserHobbiesTags dataHobbies={data?.hobbies} />
+                  {data?.hobbies.length > 0 ? (
+                    <UserHobbiesTags dataHobbies={data?.hobbies} />
+                  ) : (
+                    <p className='m-4 text-gray-500'>
+                      No hobbies to show at the moment
+                    </p>
+                  )}
                 </div>
               </div>
 
