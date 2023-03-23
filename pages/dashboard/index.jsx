@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import ProjectsCard from '../../components/ProjectsCard';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
+import DashboardSkeleton from '../../components/Skeleton/DashboardSkeleton';
 
 const DashboardPage = () => {
   const fetchGetProjects = async () => {
@@ -31,7 +32,7 @@ const DashboardPage = () => {
     fetchGetProjects
   );
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) return <DashboardSkeleton />;
 
   if (isError) {
     return <span>Error: {error.message}</span>;

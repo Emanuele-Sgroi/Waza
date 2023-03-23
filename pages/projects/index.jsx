@@ -6,6 +6,7 @@ import { GrAscend, GrDescend } from 'react-icons/gr';
 import ProjectsCard from '../../components/ProjectsCard';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import Pagination from '../../components/Pagination';
+import ProjectSkeleton from '../../components/Skeleton/ProjectsSkeleton';
 
 const ProjectPage = () => {
   const [search, setSearch] = useState('');
@@ -80,7 +81,7 @@ const ProjectPage = () => {
     }
   );
 
-  if (GetProjectLoading) return <LoadingSpinner />;
+  if (GetProjectLoading) return <ProjectSkeleton />;
 
   if (GetProjectIsError) {
     return <span>Error: {error.message}</span>;
